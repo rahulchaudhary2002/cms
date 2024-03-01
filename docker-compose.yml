@@ -1,0 +1,72 @@
+version: "3.7"
+
+services:
+  cms_db:
+    image: mariadb:10.5.6
+    container_name: cms_db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - mariadbdata:/var/lib/mysql
+      - ./.dockerfile/mysql/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - cms-network
+
+  cms_phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: cms_phpmyadmin
+    depends_on:
+      - cms_db
+    environment:
+      PMA_HOST: cms_db
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 8888:80
+    networks:
+      - cms-network
+
+  cms-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        user: cms
+        uid: 1000
+    image: 'cms-app'
+    container_name: 'cms-app'
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+      - ./.dockerfile/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - cms-network
+
+  cms-webserver:
+    image: nginx:alpine
+    container_name: 'cms-webserver'
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "8100:80"
+      - "8143:443"
+    volumes:
+      - ./:/var/www
+      - ./.dockerfile/nginx/conf.d:/etc/nginx/conf.d/
+    networks:
+      - cms-network
+
+volumes:
+  mariadbdata:
+
+networks:
+  cms-network:
+    driver: bridge
