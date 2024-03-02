@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="container">
-    <form class="row" action="{{ route('user.update', $user->key) }}" method="POST">
+    <form class="row" action="{{ route('user.update', $user->key) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="col-md-12">
@@ -25,44 +25,59 @@
                 </div>
                 <div class="card-body">
                     <div class="row mt-2 mb-2">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="name">Name <span class="text-danger">*</span></label>
-                                <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
-                                @error('name')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                        <div class="col-md-3 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-12" style="margin: auto;">
+                                    <img src="{{ $user->image ? asset('storage/users/'.$user->image) : asset('assets/images/noimage.jpg') }}" alt="User Image" style="border-radius: 20px; width:85px; height:85px" id="selected-user-img">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="file" name="file" id="file" accept="image/*" hidden onchange="handleFileUpload(event)">
+                                <button class="btn btn-md btn-primary form-control" type="button" onclick="$('#file').click()"><span class="fa fa-image"></span> select image</button>
                             </div>
                         </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="email">Email <span class="text-danger">*</span></label>
-                                <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ $user->email }}" readonly>
-                                @error('email')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="date_of_birth">Date of Birth <span class="text-danger">*</span></label>
-                                <input id="date_of_birth" class="form-control" type="date" name="date_of_birth" value="{{ $user->dob }}">
-                                @error('date_of_birth')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="role">Role <span class="text-danger">*</span></label>
-                                <select class="form-control" name="roles[]" id="role" data-init-plugin="select2" multiple>
-                                    @foreach($roles as $role)
-                                    <option value="{{ $role->id }}" @if($user->hasRole($role->key)) selected @endif>{{ $role->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('role')
-                                <span class="text-danger">{{ $message }}</span>
-                                @enderror
+                        <div class="col-md-9 col-sm-12">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Name <span class="text-danger">*</span></label>
+                                        <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}">
+                                        @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="email">Email <span class="text-danger">*</span></label>
+                                        <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ $user->email }}" readonly>
+                                        @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="date_of_birth">Date of Birth <span class="text-danger">*</span></label>
+                                        <input id="date_of_birth" class="form-control" type="date" name="date_of_birth" value="{{ $user->dob }}">
+                                        @error('date_of_birth')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="role">Role <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="roles[]" id="role" data-init-plugin="select2" multiple>
+                                            @foreach($roles as $role)
+                                            <option value="{{ $role->id }}" @if($user->hasRole($role->key)) selected @endif>{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('role')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -231,6 +246,22 @@
             $('#check-permission-' + type).prop('checked', false);
         }
         totalpermissioncheckbox = $('input.check-permission-' + type + ':checkbox:not(":checked")').length;
+    }
+
+    function handleFileUpload(event) {
+        const fileInput = event.target;
+        const previewImage = $('#selected-user-img');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImage.attr('src', e.target.result);
+                previewImage.show();
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
     }
 </script>
 

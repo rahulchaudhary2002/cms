@@ -12,7 +12,7 @@
 
 @section('content')
 <div class="container">
-    <form action="{{ route('student.update', $student->key) }}" method="POST">
+    <form action="{{ route('student.update', $student->key) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -26,42 +26,57 @@
                     </div>
                     <div class="card-body">
                         <div class="row mt-2 mb-2">
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $student->name }}" >
-                                    @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                            <div class="col-md-3 col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-12" style="margin: auto;">
+                                        <img src="{{ $student->image ? asset('storage/users/'.$student->image) : asset('assets/images/noimage.jpg') }}" alt="User Image" style="border-radius: 20px; width:85px; height:85px" id="selected-user-img">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="file" name="file" id="file" accept="image/*" hidden onchange="handleFileUpload(event)">
+                                    <button class="btn btn-md btn-primary form-control" type="button" onclick="$('#file').click()"><span class="fa fa-image"></span> select image</button>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="email">Email <span class="text-danger">*</span></label>
-                                    <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ $student->email }}" readonly >
-                                    @error('email')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="date_of_birth">Date of Birth <span class="text-danger">*</span></label>
-                                    <input id="date_of_birth" class="form-control" type="date" name="date_of_birth" value="{{ $student->dob }}" >
-                                    @error('date_of_birth')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="role">Role <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="role" id="role"  data-init-plugin="select2">
-                                        <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
-                                    </select>
-                                    @error('role')
-                                    <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                            <div class="col-md-9 col-sm-12">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="name">Name <span class="text-danger">*</span></label>
+                                            <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $student->name }}">
+                                            @error('name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="email">Email <span class="text-danger">*</span></label>
+                                            <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ $student->email }}" readonly>
+                                            @error('email')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="date_of_birth">Date of Birth <span class="text-danger">*</span></label>
+                                            <input id="date_of_birth" class="form-control" type="date" name="date_of_birth" value="{{ $student->dob }}">
+                                            @error('date_of_birth')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label for="role">Role <span class="text-danger">*</span></label>
+                                            <select class="form-control" name="role" id="role" data-init-plugin="select2">
+                                                <option value="{{ $role->id }}" selected>{{ $role->name }}</option>
+                                            </select>
+                                            @error('role')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,7 +93,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="mobile">Mobile <span class="text-danger">*</span></label>
-                                    <input id="mobile" class="form-control" type="number" name="mobile" placeholder="Mobile" value="{{ $student->mobile }}" >
+                                    <input id="mobile" class="form-control" type="number" name="mobile" placeholder="Mobile" value="{{ $student->mobile }}">
                                     @error('mobile')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -87,7 +102,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="permanent-address">Permanent Address <span class="text-danger">*</span></label>
-                                    <input id="permanent-address" class="form-control" type="text" name="permanent_address" placeholder="Permanent Address" value="{{ $student->permanent_address }}" >
+                                    <input id="permanent-address" class="form-control" type="text" name="permanent_address" placeholder="Permanent Address" value="{{ $student->permanent_address }}">
                                     @error('permanent_address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -96,7 +111,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="temporary-address">Temporary Address <span class="text-danger">*</span></label>
-                                    <input id="temporary-address" class="form-control" type="text" name="temporary_address" placeholder="Temporary Address" value="{{ $student->temporary_address }}" >
+                                    <input id="temporary-address" class="form-control" type="text" name="temporary_address" placeholder="Temporary Address" value="{{ $student->temporary_address }}">
                                     @error('temporary_address')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -105,7 +120,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="nationality">Nationality</label>
-                                    <input id="nationality" class="form-control" type="text" name="nationality" placeholder="Nationality" value="{{ $student->nationality ?? '' }}" >
+                                    <input id="nationality" class="form-control" type="text" name="nationality" placeholder="Nationality" value="{{ $student->nationality ?? '' }}">
                                     @error('nationality')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -125,7 +140,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="academic-year">Academic Year <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="academic_year" id="academic-year"  data-init-plugin="select2">
+                                    <select class="form-control" name="academic_year" id="academic-year" data-init-plugin="select2">
                                         <option value="{{ $student->student->academic_year_id ?? '' }}" selected>{{ $student->student->academicYear->name ?? '' }}</option>
                                     </select>
                                     @error('program')
@@ -136,7 +151,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="program">Program <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="program" id="program"  data-init-plugin="select2">
+                                    <select class="form-control" name="program" id="program" data-init-plugin="select2">
                                         <option value="{{ $student->student->program_id ?? '' }}" selected>{{ $student->student->program->name }}</option>
                                     </select>
                                     @error('program')
@@ -248,6 +263,22 @@
             $('#check-permission-' + type).prop('checked', false);
         }
         totalpermissioncheckbox = $('input.check-permission-' + type + ':checkbox:not(":checked")').length;
+    }
+
+    function handleFileUpload(event) {
+        const fileInput = event.target;
+        const previewImage = $('#selected-user-img');
+
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImage.attr('src', e.target.result);
+                previewImage.show();
+            };
+
+            reader.readAsDataURL(fileInput.files[0]);
+        }
     }
 </script>
 

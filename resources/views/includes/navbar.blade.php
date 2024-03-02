@@ -11,7 +11,7 @@
         <div class="dropdown">
             <a class="user dropdown-toggle" href="javascript:void(0)">
                 <div class="user-img">
-                    <img src="{{ asset('assets/images/rahul.jpg') }}">
+                    <img src="{{ auth()->user()->image ? asset('storage/users/'.auth()->user()->image) : asset('assets/images/noimage.jpg') }}">
                 </div>
                 <div class="user-title">
                     <strong class="user-name">{{ auth()->user()->name }}</strong>

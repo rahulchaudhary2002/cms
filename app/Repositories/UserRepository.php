@@ -65,6 +65,11 @@ class UserRepository implements UserRepositoryInterface
 
     public function create($request)
     {
+        if ($request->hasFile('file')) {
+            $filename = 'image_' . time() . '.' . $request->file('file')->getClientOriginalExtension();
+            $request->file('file')->storeAs('public/users', $filename);
+        }
+
         return User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -74,11 +79,17 @@ class UserRepository implements UserRepositoryInterface
             'permanent_address' => $request->permanent_address,
             'temporary_address' => $request->temporary_address,
             'nationality' => $request->nationality,
+            'image' => $filename ?? ''
         ]);
     }
 
     public function update($request, $key)
     {
+        if ($request->hasFile('file')) {
+            $filename = 'image_' . time() . '.' . $request->file('file')->getClientOriginalExtension();
+            $request->file('file')->storeAs('public/users', $filename);
+        }
+        
         $user = $this->getByKey($key);
 
         $user->update([
@@ -88,6 +99,7 @@ class UserRepository implements UserRepositoryInterface
             'permanent_address' => $request->permanent_address,
             'temporary_address' => $request->temporary_address,
             'nationality' => $request->nationality,
+            'image' => $filename ?? ''
         ]);
 
         return $user;

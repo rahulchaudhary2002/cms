@@ -18,7 +18,7 @@
                 <div class="card-body d-flex-space-between align-center">
                     <div class="user d-flex gap-1 align-center">
                         <div class="user-img">
-                            <img src="{{ asset('assets/images/rahul.jpg') }}" alt="{{ $user->name }}">
+                            <img src="{{ $user->image ? asset('storage/users/'.$user->image) : asset('assets/images/noimage.jpg') }}" alt="{{ $user->name }}">
                         </div>
                         <div class="user-title">
                             <strong class="user-name">{{ $user->name }}</strong>
@@ -40,7 +40,7 @@
                 <div class="card-body expand">
                     <div class="row">
                         <div class="col-md-4 col-sm-12">
-                            <img class="detail-img" src="{{ asset('assets/images/rahul.jpg') }}" alt="{{ $user->name }}">
+                            <img class="detail-img" src="{{ $user->image ? asset('storage/users/'.$user->image) : asset('assets/images/noimage.jpg') }}" alt="{{ $user->name }}">
                         </div>
                         <div class="col-md-8 col-sm-12 mt-2">
                             <div class="d-flex-space-between align-center">

@@ -28,7 +28,8 @@ class User extends Authenticatable
         'dob',
         'permanent_address',
         'temporary_address',
-        'nationality'
+        'nationality',
+        'image'
     ];
 
     /**

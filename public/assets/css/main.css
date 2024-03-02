@@ -104,6 +104,10 @@ form .row>div:last-child {
     justify-content: flex-end;
 }
 
+.flex-direction-column {
+    flex-direction: column;
+}
+
 .line-height-normal {
     line-height: 1.4;
 }
