@@ -25,16 +25,14 @@
                             <span class="user-role">{{ $user->student->program->name }} | {{ $user->student->semester()->latest()->first()->semester->name ?? "" }}</span>
                         </div>
                     </div>
+                    <div class="accordion d-flex-center gap-2 f-6">
+                        <a class="active" href="javascript:;" data-target="#personal-info"><span class="fa fa-user"></span> Personal Information</a>
+                        <a href="javascript:;" data-target="#semester-info"><span class="fa fa-graduation-cap"></span> Semesters</a>
+                    </div>
                     <div class="card-setting d-flex gap-2">
                         <a class="text-danger" href="{{ route('student.index') }}"><span class="fa fa-arrow-left"></span></a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="accordion d-flex-center gap-2 f-6 mb-3 mt-2">
-                <a class="active" href="javascript:;" data-target="#personal-info">Personal Information</a>
-                <a href="javascript:;" data-target="#semester-info">Semesters</a>
             </div>
         </div>
         <div id="personal-info" class="col-md-12 accordion-item">
@@ -86,7 +84,10 @@
                 <div class="col-md-3">
                     <div class="card card-rounded">
                         <div class="card-body">
-                            <div class="d-flex-center align-center" style="height: 120px;">
+                            @if($user->student->semester->semester_id == $semester->semester_id)
+                            <span class="text-success pull-right">Active</span>
+                            @endif
+                            <div class="d-flex-center align-center" style="height: 100px;">
                                 <h3>{{ $semester->semester->name }}</h3>
                             </div>
                         </div>

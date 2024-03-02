@@ -25,16 +25,16 @@
                             <span class="user-role">{{ $user->roles()->first()->role->name }}</span>
                         </div>
                     </div>
+                    <div class="accordion d-flex-center gap-2 f-6">
+                        <a class="active" href="javascript:;" data-target="#personal-info">
+                            <sapn class="fa fa-user"></sapn> Personal Information
+                        </a>
+                        <a href="javascript:;" data-target="#course-info"><span class="fa fa-book"></span> Courses</a>
+                    </div>
                     <div class="card-setting d-flex gap-2">
                         <a class="text-danger" href="{{ route('user.index') }}"><span class="fa fa-arrow-left"></span></a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="accordion d-flex-center gap-2 f-6 mb-3 mt-2">
-                <a class="active" href="javascript:;" data-target="#personal-info">Personal Information</a>
-                <a href="javascript:;" data-target="#course-info">Course Information</a>
             </div>
         </div>
         <div id="personal-info" class="col-md-12 accordion-item">

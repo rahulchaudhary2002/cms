@@ -953,6 +953,6 @@ textarea {
 }
 
 .accordion a.active {
-    color: var(--green-color);
+    color: var(--sky-color);
     transition: 0.3s;
 }
