@@ -22,7 +22,7 @@
                         </div>
                         <div class="user-title">
                             <strong class="user-name">{{ $user->name }}</strong>
-                            <span class="user-role">{{ $user->student->program->name }} | {{ $user->student->semester()->latest()->first()->semester->name ?? "" }}</span>
+                            <span class="user-role">{{ $user->student->program->name }} | {{ $user->student->semester->semester->name ?? "" }}</span>
                         </div>
                     </div>
                     <div class="accordion d-flex-center gap-2 f-6">

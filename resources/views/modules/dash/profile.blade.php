@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Show Staff')
+@section('title', 'Profile')
 
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('user.index') }}">Staff</a></li>
-    <li class="breadcrumb-item">Show</li>
+    <li class="breadcrumb-item">Profile</li>
 </ul>
 @endsection
 
 @section('content')
+@php $user = auth()->user(); @endphp
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -26,13 +26,20 @@
                         </div>
                     </div>
                     <div class="accordion d-flex-center gap-2 f-6">
+                        @if($user->is_super == 0)
                         <a class="active" href="javascript:;" data-target="#personal-info">
                             <sapn class="fa fa-user"></sapn> Personal Information
                         </a>
+                        @endif
+                        @if($user->hasRole('teacher'))
                         <a href="javascript:;" data-target="#course-info"><span class="fa fa-book"></span> Courses</a>
+                        @endif
+                        @if($user->hasRole('student'))
+                        <a href="javascript:;" data-target="#semester-info"><span class="fa fa-graduation-cap"></span> Semesters</a>
+                        @endif
                     </div>
                     <div class="card-setting d-flex gap-2">
-                        <a class="text-danger" href="{{ route('user.index') }}"><span class="fa fa-arrow-left"></span></a>
+                        <a class="text-danger" href="{{ route('dashboard') }}"><span class="fa fa-arrow-left"></span></a>
                     </div>
                 </div>
             </div>
@@ -48,11 +55,9 @@
                             <div class="d-flex-space-between align-center">
                                 <strong class="card-title">Personal Information</strong>
                                 <div class="card-setting d-flex gap-1">
-                                    @if(auth()->user()->can('user.edit') && $user->is_super == 0)
+                                    @if($user->can('user.edit') && $user->hasRole('superadmin'))
                                     <a class="btn btn-sm btn-gray" href="{{ route('user.edit', $user->key) }}"><span class="fa fa-edit"></span></a>
                                     @endif
-                                    <a class="btn btn-sm btn-gray" href="#"><span class="fa fa-print"></span></a>
-                                    <a class="btn btn-sm btn-gray" href="#"><span class="fa fa-download"></span></a>
                                 </div>
                             </div>
                             <div class="row line-height-2">
@@ -72,6 +77,14 @@
                                         <div class="col-md-8">{{ $user->permanent_address }}</div>
                                         <div class="col-md-4">Nationality :</div>
                                         <div class="col-md-8">{{ $user->nationality ?? 'N/A' }}</div>
+                                        @if($user->hasRole('student'))
+                                        <div class="col-md-4">Academic Year :</div>
+                                        <div class="col-md-8">{{ $user->student->academicYear->name }}</div>
+                                        <div class="col-md-4">Program :</div>
+                                        <div class="col-md-8">{{ $user->student->program->name }}</div>
+                                        <div class="col-md-4">Semester :</div>
+                                        <div class="col-md-8">{{ $user->student->semester->semester->name ?? "N/A" }}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -80,6 +93,7 @@
                 </div>
             </div>
         </div>
+        @if($user->hasRole('teacher'))
         <div id="course-info" class="col-md-12 accordion-item hide hidden">
             <div class="row">
                 @forelse($user->teacher->teacherCourses()->latest()->get() as $course)
@@ -115,6 +129,35 @@
                 @endforelse
             </div>
         </div>
+        @endif
+        @if($user->hasRole('student'))
+        <div id="semester-info" class="col-md-12 accordion-item hide hidden">
+            <div class="row">
+                @forelse($user->student->semesters as $semester)
+                <div class="col-md-3">
+                    <div class="card card-rounded">
+                        <div class="card-body">
+                            @if($user->student->semester->semester_id == $semester->semester_id)
+                            <span class="text-success pull-right">Active</span>
+                            @endif
+                            <div class="d-flex-center align-center" style="height: 100px;">
+                                <h3>{{ $semester->semester->name }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @empty
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {{ $user->name }} is not yet assigned any semester.
+                        </div>
+                    </div>
+                </div>
+                @endforelse
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RoleController;
@@ -14,7 +15,6 @@ use App\Http\Controllers\StudentSemesterController;
 use App\Http\Controllers\TeacherCourseController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,24 +31,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/login');
 });
-
-Route::get('/dashboard', function () {
-    return view('modules.dash.index');
-})->middleware(['auth'])->name('dashboard');
-
-Route::post('/ck-file-upload', function (Request $request) {
-    if ($request->hasFile('upload')) {
-        $originName = $request->file('upload')->getClientOriginalName();
-        $fileName = pathinfo($originName, PATHINFO_FILENAME);
-        $extension = $request->file('upload')->getClientOriginalExtension();
-        $fileName = $fileName . '_' . time() . '.' . $extension;
-
-        $request->file('upload')->move(public_path('media'), $fileName);
-
-        $url = asset('media/' . $fileName);
-        return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
-    }
-})->middleware(['auth'])->name('ck-file-upload');
+Route::middleware('auth')->group(function() {
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+    Route::post('/ck-file-upload', [HomeController::class, 'ckFileUpload'])->name('ck-file-upload');
+    Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+});
 
 require __DIR__ . '/auth.php';
 

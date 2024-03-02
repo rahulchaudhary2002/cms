@@ -54,7 +54,7 @@ class UserController extends Controller
         $permissions = $this->userService->getPermissions();
         $permissionsGroups = $permissions->groupBy('type');
 
-        if($user->is_super == 1 || $user->hasRole('student')) {
+        if(($request->user()->id != $user->id && $user->is_super == 1) || $user->hasRole('student')) {
             abort(404);
         }
 
