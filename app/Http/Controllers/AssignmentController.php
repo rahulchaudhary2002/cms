@@ -22,7 +22,7 @@ class AssignmentController extends Controller
     public function index(Request $request)
     {
         $result = (object) $this->assignmentService->getAssignments($request);
-        $academicYears = $this->assignmentService->getAcademicYear();
+        $academicYears = $this->assignmentService->getAcademicYears();
         $programs = $this->assignmentService->getPrograms();
         $semesters = $this->assignmentService->getSemestersWithProgram();
         $sessions = $this->assignmentService->getSessionsWithAcademicYearSemesterAndProgram();
@@ -33,7 +33,7 @@ class AssignmentController extends Controller
 
     public function create()
     {
-        $academicYears = $this->assignmentService->getAcademicYear();
+        $academicYears = $this->assignmentService->getAcademicYears();
         $programs = $this->assignmentService->getPrograms();
         $semesters = $this->assignmentService->getSemestersWithProgram();
         $sessions = $this->assignmentService->getSessionsWithAcademicYearSemesterAndProgram();
@@ -58,7 +58,7 @@ class AssignmentController extends Controller
             abort(404);
         }
         
-        $academicYears = $this->assignmentService->getAcademicYear();
+        $academicYears = $this->assignmentService->getAcademicYears();
         $programs = $this->assignmentService->getPrograms();
         $semesters = $this->assignmentService->getSemestersWithProgram();
         $sessions = $this->assignmentService->getSessionsWithAcademicYearSemesterAndProgram();

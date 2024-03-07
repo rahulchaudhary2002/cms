@@ -19,7 +19,7 @@ class ExaminationStageController extends Controller
     public function index(Request $request)
     {
         $result = (object) $this->examinationStageService->getExaminationStages($request);
-        $academicYears = $this->examinationStageService->getAcademicYear();
+        $academicYears = $this->examinationStageService->getAcademicYears();
         $programs = $this->examinationStageService->getPrograms();
         $semesters = $this->examinationStageService->getSemestersWithProgram();
         $sessions = $this->examinationStageService->getSessionsWithAcademicYearSemesterAndProgram();
@@ -29,7 +29,7 @@ class ExaminationStageController extends Controller
 
     public function create()
     {
-        $academicYears = $this->examinationStageService->getAcademicYear();
+        $academicYears = $this->examinationStageService->getAcademicYears();
         $programs = $this->examinationStageService->getPrograms();
         $semesters = $this->examinationStageService->getSemestersWithProgram();
         $sessions = $this->examinationStageService->getSessionsWithAcademicYearSemesterAndProgram();
@@ -48,7 +48,7 @@ class ExaminationStageController extends Controller
     public function edit($key)
     {
         $examinationStage = $this->examinationStageService->getExaminationStageByKey($key);
-        $academicYears = $this->examinationStageService->getAcademicYear();
+        $academicYears = $this->examinationStageService->getAcademicYears();
         $programs = $this->examinationStageService->getPrograms();
         $semesters = $this->examinationStageService->getSemestersWithProgram();
         $sessions = $this->examinationStageService->getSessionsWithAcademicYearSemesterAndProgram();

@@ -30,7 +30,7 @@ class StudentAttendanceController extends Controller
 
         $programs = $this->studentAttendanceService->getPrograms();
         $semesters = $this->studentAttendanceService->getSemestersWithProgram();
-        $academicYears = $this->studentAttendanceService->getAcademicYear();
+        $academicYears = $this->studentAttendanceService->getAcademicYears();
         $sessions = $this->studentAttendanceService->getSessionsWithAcademicYearSemesterAndProgram();
         $courses = $this->studentAttendanceService->getCoursesWithSemester();
 
@@ -46,7 +46,7 @@ class StudentAttendanceController extends Controller
         }
         $programs = $this->studentAttendanceService->getPrograms();
         $semesters = $this->studentAttendanceService->getSemestersWithProgram();
-        $academicYears = $this->studentAttendanceService->getAcademicYear();
+        $academicYears = $this->studentAttendanceService->getAcademicYears();
         $sessions = $this->studentAttendanceService->getSessionsWithAcademicYearSemesterAndProgram();
         $courses = $this->studentAttendanceService->getCoursesWithSemester();
 

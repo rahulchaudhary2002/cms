@@ -10,11 +10,15 @@ use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\StudentRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Traits\AcademicYearTrait;
+use App\Traits\ProgramTrait;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
 class StudentService
 {
+    use AcademicYearTrait, ProgramTrait;
+    
     private StudentRepositoryInterface $studentRepository;
     private UserRepositoryInterface $userRepository;
     private RoleRepositoryInterface $roleRepository;
@@ -117,14 +121,6 @@ class StudentService
     public function getPermissions()
     {
         return $this->permissionRepository->model()->get();
-    }
-
-    public function getAcademicYears() {
-        return $this->academicYearRepository->model()->get();
-    }
-
-    public function getPrograms() {
-        return $this->programRepository->model()->get();
     }
 
     public function getSemestersWithProgram() 

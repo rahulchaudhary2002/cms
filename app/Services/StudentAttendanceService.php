@@ -9,11 +9,20 @@ use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\StudentAttendanceRepositoryInterface;
 use App\Interfaces\StudentRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
+use App\Traits\AcademicYearTrait;
+use App\Traits\CourseTrait;
+use App\Traits\ProgramTrait;
+use App\Traits\SemesterTrait;
+use App\Traits\SessionTrait;
 use Exception;
 
 class StudentAttendanceService
 {
+    use AcademicYearTrait, ProgramTrait, SemesterTrait, SessionTrait, CourseTrait;
+
     private StudentAttendanceRepositoryInterface $studentAttendanceRepository;
+    private UserRepositoryInterface $userRepository;
     private StudentRepositoryInterface $studentRepository;
     private ProgramRepositoryInterFace $programRepository;
     private SemesterRepositoryInterFace $semesterRepository;
@@ -21,9 +30,10 @@ class StudentAttendanceService
     private SessionRepositoryInterface $sessionRepository;
     private CourseRepositoryInterFace $courseRepository;
 
-    public function __construct(StudentAttendanceRepositoryInterface $studentAttendanceRepository, StudentRepositoryInterface $studentRepository, ProgramRepositoryInterFace $programRepository, SemesterRepositoryInterFace $semesterRepository, AcademicYearRepositoryInterface $academicYearRepository, SessionRepositoryInterface $sessionRepository, CourseRepositoryInterface $courseRepository)
+    public function __construct(StudentAttendanceRepositoryInterface $studentAttendanceRepository, UserRepositoryInterface $userRepository, StudentRepositoryInterface $studentRepository, ProgramRepositoryInterFace $programRepository, SemesterRepositoryInterFace $semesterRepository, AcademicYearRepositoryInterface $academicYearRepository, SessionRepositoryInterface $sessionRepository, CourseRepositoryInterface $courseRepository)
     {
         $this->studentAttendanceRepository = $studentAttendanceRepository;
+        $this->userRepository = $userRepository;
         $this->studentRepository = $studentRepository;
         $this->programRepository = $programRepository;
         $this->semesterRepository = $semesterRepository;
@@ -65,73 +75,6 @@ class StudentAttendanceService
             return $attendances;
         } catch (Exception $e) {
         }
-    }
-
-    public function getPrograms()
-    {
-        return $this->programRepository->model()->get();
-    }
-
-    public function getAcademicYear()
-    {
-        return $this->academicYearRepository->model()->get();
-    }
-
-    public function getSemestersWithProgram()
-    {
-        $user = $this->studentRepository->getById(auth()->user()->id);
-
-        if ($user->hasRole('student')) {
-            return $this->semesterRepository->model()->with('program')->whereHas('studentSemesters', function ($query) use ($user) {
-                $query->where('student_id', $user->student->id);
-            })->get();
-        }
-
-        return $this->semesterRepository->getWithRelation('program');
-    }
-
-    public function getSessionsWithAcademicYearSemesterAndProgram()
-    {
-        $user = $this->studentRepository->getById(auth()->user()->id);
-
-        if ($user->hasRole('superadmin')) {
-            return $this->sessionRepository->getWithRelation(['academicYear', 'semester', 'program']);
-        }
-
-        if ($user->hasRole('teacher')) {
-            return $this->sessionRepository->model()->with(['academicYear', 'semester', 'program'])->whereHas('teacherCourses', function ($query) use ($user) {
-                $query->where('teacher_id', $user->teacher->id);
-            })->get();
-        }
-
-        if ($user->hasRole('student')) {
-            return [];
-        }
-
-        return $this->sessionRepository->getWithRelation(['academicYear', 'semester', 'program']);
-    }
-
-    public function getCoursesWithSemester()
-    {
-        $user = $this->studentRepository->getById(auth()->user()->id);
-
-        if ($user->hasRole('superadmin')) {
-            return $this->courseRepository->getWithRelation(['semester']);
-        }
-
-        if ($user->hasRole('teacher')) {
-            return $this->courseRepository->model()->with(['semester', 'teacherCourses.session'])->whereHas('teacherCourses', function ($query) use ($user) {
-                $query->where('teacher_id', $user->teacher->id);
-            })->get();
-        }
-
-        if ($user->hasRole('student')) {
-            return $this->courseRepository->model()->with(['semester'])->whereHas('studentCourses', function ($query) use ($user) {
-                $query->where('student_id', $user->student->id);
-            })->get();
-        }
-
-        return $this->courseRepository->getWithRelation(['semester']);
     }
 
     public function takeAttendance($request)

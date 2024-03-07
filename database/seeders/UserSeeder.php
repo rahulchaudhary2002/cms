@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
         ]);
         
         $user->assignRole('teacher');
-        $user->givePermissions(['view-attendance', 'take-attendance', 'view-assignment', 'create-assignment', 'update-assignment', 'check-assignment', 'view-submission']);
+        $user->givePermissions(['view-attendance', 'take-attendance', 'view-assignment', 'create-assignment', 'update-assignment', 'check-submission', 'view-submission']);
 
         Teacher::create([
             'user_id' => $user->id
@@ -83,7 +83,7 @@ class UserSeeder extends Seeder
         ]);
         
         $user->assignRole('teacher');
-        $user->givePermissions(['view-attendance', 'take-attendance', 'view-assignment', 'create-assignment', 'update-assignment', 'check-assignment', 'view-submission']);
+        $user->givePermissions(['view-attendance', 'take-attendance', 'view-assignment', 'create-assignment', 'update-assignment', 'check-submission', 'view-submission']);
 
         Teacher::create([
             'user_id' => $user->id

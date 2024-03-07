@@ -25,7 +25,7 @@ class CreateCourseRequest extends FormRequest
             'name' => 'required',
             'course_code' => ['required', 'unique:courses,course_code',],
             'credit' => 'required|integer',
-            'program' => 'required|exists:progrms,id',
+            'program' => 'required|exists:programs,id',
             'semester' => 'required|exists:semesters,id',
             'elective' => 'nullable|boolean'
         ];

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Interfaces\PermissionRepositoryInterface;
-use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\RoleRepositoryInterface;
 use App\Interfaces\TeacherRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;

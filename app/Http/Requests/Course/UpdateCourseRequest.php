@@ -26,7 +26,7 @@ class UpdateCourseRequest extends FormRequest
             'name' => 'required',
             'course_code' => 'required|unique:courses,course_code,' . $this->key . ',key',
             'credit' => 'required|integer',
-            'program' => 'required|exists:progrms,id',
+            'program' => 'required|exists:programs,id',
             'semester' => 'required|exists:semesters,id',
             'elective' => 'nullable|boolean'
         ];

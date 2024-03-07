@@ -6,19 +6,27 @@ use App\Interfaces\AcademicYearRepositoryInterface;
 use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
+use App\Traits\AcademicYearTrait;
+use App\Traits\ProgramTrait;
+use App\Traits\SemesterTrait;
 
 class SessionService
 {
+    use AcademicYearTrait, ProgramTrait, SemesterTrait;
+
     private SessionRepositoryInterFace $sessionRepository;
     private AcademicYearRepositoryInterface $academicYearRepository;
     private ProgramRepositoryInterFace $programRepository;
     private SemesterRepositoryInterFace $semesterRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(SessionRepositoryInterface $sessionRepository, AcademicYearRepositoryInterface $academicYearRepository, ProgramRepositoryInterFace $programRepository, SemesterRepositoryInterFace $semesterRepository) {
+    public function __construct(SessionRepositoryInterface $sessionRepository, AcademicYearRepositoryInterface $academicYearRepository, ProgramRepositoryInterFace $programRepository, SemesterRepositoryInterFace $semesterRepository, UserRepositoryInterface $userRepository) {
         $this->sessionRepository = $sessionRepository;
         $this->academicYearRepository = $academicYearRepository;
         $this->programRepository = $programRepository;
         $this->semesterRepository = $semesterRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function getSessions($request)
@@ -39,25 +47,5 @@ class SessionService
     public function updateSession($request, $key)
     {
         return $this->sessionRepository->update($request, $key); 
-    }
-
-    public function getAcademicYears()
-    {
-        return $this->academicYearRepository->model()->get(); 
-    }
-
-    public function getPrograms()
-    {
-        return $this->programRepository->model()->get(); 
-    }
-
-    public function getSemesters()
-    {
-        return $this->semesterRepository->model()->get(); 
-    }
-
-    public function getSemestersWithProgram() 
-    {
-        return $this->semesterRepository->getWithRelation('program');
     }
 }

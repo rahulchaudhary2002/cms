@@ -8,9 +8,15 @@ use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\TeacherCourseRepositoryInterface;
 use App\Interfaces\TeacherRepositoryInterface;
+use App\Traits\AcademicYearTrait;
+use App\Traits\CourseTrait;
+use App\Traits\ProgramTrait;
+use App\Traits\SessionTrait;
 
 class TeacherCourseService
 {
+    use AcademicYearTrait, ProgramTrait, SessionTrait, CourseTrait;
+    
     private TeacherCourseRepositoryInterface $teacherCourseRepository;
     private TeacherRepositoryInterface $teacherRepository;
     private AcademicYearRepositoryInterface $academicYearRepository;
@@ -30,26 +36,6 @@ class TeacherCourseService
     public function getTeacherByKey($user_key)
     {
         return $this->teacherRepository->getByKey($user_key);
-    }
-
-    public function getAcademicYearWithSessions()
-    {
-        return $this->academicYearRepository->getWithSessions();
-    }
-
-    public function getSessionsWithAcademicYearSemesterAndProgram()
-    {
-        return $this->sessionRepository->getWithRelation(['academicYear', 'semester', 'program']);
-    }
-
-    public function getCourses()
-    {
-        return $this->courseRepository->model()->get();
-    }
-
-    public function getPrograms()
-    {
-        return $this->programRepository->model()->get();
     }
 
     public function assignCourse($request, $user_key)

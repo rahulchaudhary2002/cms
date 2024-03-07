@@ -4,9 +4,12 @@ namespace App\Services;
 
 use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SemesterRepositoryInterFace;
+use App\Traits\ProgramTrait;
 
 class SemesterService
 {
+    use ProgramTrait;
+    
     private SemesterRepositoryInterFace $semesterRepository;
     private ProgramRepositoryInterFace $programRepository;
 
@@ -33,10 +36,5 @@ class SemesterService
     public function updateSemester($request, $key)
     {
         return $this->semesterRepository->update($request, $key); 
-    }
-
-    public function getPrograms() 
-    {
-        return $this->programRepository->model()->get();
     }
 }

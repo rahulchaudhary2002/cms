@@ -5,17 +5,24 @@ namespace App\Services;
 use App\Interfaces\CourseRepositoryInterFace;
 use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SemesterRepositoryInterFace;
+use App\Interfaces\UserRepositoryInterface;
+use App\Traits\ProgramTrait;
+use App\Traits\SemesterTrait;
 
 class CourseService
 {
+    use ProgramTrait, SemesterTrait;
+
     private ProgramRepositoryInterFace $programRepository;
     private SemesterRepositoryInterFace $semesterRepository;
     private CourseRepositoryInterFace $courseRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(ProgramRepositoryInterFace $programRepository, CourseRepositoryInterface $courseRepository, SemesterRepositoryInterFace $semesterRepository) {
+    public function __construct(ProgramRepositoryInterFace $programRepository, CourseRepositoryInterface $courseRepository, SemesterRepositoryInterFace $semesterRepository, UserRepositoryInterface $userRepository) {
         $this->programRepository = $programRepository;
         $this->courseRepository = $courseRepository;
         $this->semesterRepository = $semesterRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function getCourses($request)
@@ -36,20 +43,5 @@ class CourseService
     public function updateCourse($request, $key)
     {
         return $this->courseRepository->update($request, $key); 
-    }
-
-    public function getSemesters() 
-    {
-        return $this->semesterRepository->model()->get();
-    }
-
-    public function getSemestersWithProgram() 
-    {
-        return $this->semesterRepository->getWithRelation('program');
-    }
-
-    public function getPrograms() 
-    {
-        return $this->programRepository->model()->get();
     }
 }

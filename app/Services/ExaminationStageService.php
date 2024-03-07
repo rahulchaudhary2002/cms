@@ -8,9 +8,15 @@ use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Traits\AcademicYearTrait;
+use App\Traits\ProgramTrait;
+use App\Traits\SemesterTrait;
+use App\Traits\SessionTrait;
 
 class ExaminationStageService
 {
+    use AcademicYearTrait, ProgramTrait, SemesterTrait, SessionTrait;
+    
     private ExaminationStageRepositoryInterface $examinationStageRepository;
     private ProgramRepositoryInterFace $programRepository;
     private SemesterRepositoryInterFace $semesterRepository;
@@ -36,50 +42,6 @@ class ExaminationStageService
     public function getExaminationStageByKey($key)
     {
         return $this->examinationStageRepository->getByKey($key);
-    }
-
-    public function getAcademicYear()
-    {
-        return $this->academicYearRepository->model()->get();
-    }
-
-    public function getPrograms()
-    {
-        return $this->programRepository->model()->get();
-    }
-
-    public function getSemestersWithProgram()
-    {
-        $user = $this->userRepository->getById(auth()->user()->id);
-
-        if($user->hasRole('student')) {
-            return $this->semesterRepository->model()->with('program')->whereHas('studentSemesters', function ($query) use ($user) {
-                $query->where('student_id', $user->student->id);
-            })->get();
-        }
-
-        return $this->semesterRepository->getWithRelation('program');
-    }
-
-    public function getSessionsWithAcademicYearSemesterAndProgram()
-    {
-        $user = $this->userRepository->getById(auth()->user()->id);
-
-        if ($user->hasRole('superadmin')) {
-            return $this->sessionRepository->getWithRelation(['academicYear', 'semester', 'program']);
-        }
-
-        if ($user->hasRole('teacher')) {
-            return $this->sessionRepository->model()->with(['academicYear', 'semester', 'program'])->whereHas('teacherCourses', function ($query) use ($user) {
-                $query->where('teacher_id', $user->teacher->id);
-            })->get();
-        }
-
-        if($user->hasRole('student')) {
-            return [];
-        }
-
-        return $this->sessionRepository->getWithRelation(['academicYear', 'semester', 'program']);
     }
 
     public function createExaminationStage($request)

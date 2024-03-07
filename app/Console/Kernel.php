@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Console\Commands\CreateRepository;
 use App\Console\Commands\CreateRepositoryInterFace;
 use App\Console\Commands\CreateService;
+use App\Console\Commands\CreateTrait;
 use App\Console\Commands\MigrateMonthlyTable;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -15,7 +16,8 @@ class Kernel extends ConsoleKernel
         CreateRepository::class,
         CreateRepositoryInterFace::class,
         CreateService::class,
-        MigrateMonthlyTable::class
+        MigrateMonthlyTable::class,
+        CreateTrait::class,
     ];
     /**
      * Define the application's command schedule.
