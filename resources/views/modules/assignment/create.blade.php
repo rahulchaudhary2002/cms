@@ -34,7 +34,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="academicYear">Academic Year <span class="text-danger">*</span></label>
                                     <select class="form-control" name="academic_year" id="academicYear"  data-init-plugin="select2">
@@ -49,7 +49,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="program">Program <span class="text-danger">*</span></label>
                                     <select class="form-control" name="program" id="program"  data-init-plugin="select2" data-semesters="{{ $semesters }}">
@@ -64,7 +64,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="semester">Semester <span class="text-danger">*</span></label>
                                     <select class="form-control" name="semester" id="semester"  data-init-plugin="select2" data-semesterId="{{ old('semester') }}" data-sessions="{{ $sessions }}" data-courses="{{ $courses }}">
@@ -75,7 +75,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="session">Session <span class="text-danger">*</span></label>
                                     <select class="form-control" name="session" id="session"  data-init-plugin="select2" data-sessionId="{{ old('session') }}">
@@ -86,7 +86,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="course">Course <span class="text-danger">*</span></label>
                                     <select class="form-control" name="course" id="course"  data-init-plugin="select2" data-courseId="{{ old('course') }}">
@@ -97,7 +97,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="submission_date">Submission Date <span class="text-danger">*</span></label>
                                     <input class="form-control" type="date" name="submission_date" id="submission_date" value="{{ old('submission_date') ?? now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}" >
@@ -152,7 +152,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="answer-type-{{ $loop->index + 1 }}">Answer Type <span class="text-danger">*</span></label>
                                     <select class="form-control answer-type" id="answer-type-{{ $loop->index + 1 }}"  data-init-plugin="select2">
@@ -166,7 +166,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6 multiple-upload @if(old('answer_types')[$key] != 'file') hidden @endif">
+                            <div class="col-md-6 col-sm-12 multiple-upload @if(old('answer_types')[$key] != 'file') hidden @endif">
                                 <div class="checkbox mt-6">
                                     <input type="checkbox" id="multiple-upload-{{ $loop->index + 1 }}" class="multiple-upload-checkbox" @if(old('multiple_file_uploads')[$key] == 1) checked @endif>
                                     <label for="multiple-upload-{{ $loop->index + 1 }}">Allow Multiple File Uploads</label>
@@ -212,7 +212,7 @@
                                     <input class="form-control" type="text" name="question_titles[1]" id="question-title" placeholder="Question title" >
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="answer-type">Answer Type <span class="text-danger">*</span></label>
                                     <select class="form-control answer-type" id="answer-type"  data-init-plugin="select2">
@@ -325,7 +325,7 @@
                                     <input class="form-control" type="text" name="question_titles[${question_num}]" id="question-title-${question_num}" placeholder="Question title" >
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="answer-type-${question_num}">Answer Type <span class="text-danger">*</span></label>
                                     <select class="form-control answer-type" id="answer-type-${question_num}"  data-init-plugin="select2">

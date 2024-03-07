@@ -27,13 +27,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row mt-2 mb-2">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Teacher Name</label>
                                     <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}" readonly >
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="academic-year">Academic Year <span class="text-danger">*</span></label>
                                     <select class="form-control" name="academic_year" id="academic-year"  data-init-plugin="select2" data-sessions="{{ $sessions }}">

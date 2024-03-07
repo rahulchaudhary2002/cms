@@ -44,7 +44,7 @@
             </div>
         </div>
         @foreach($assignment->questions as $key => $question)
-        <div class="col-md-6">
+        <div class="col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-header d-flex-space-between align-center">
                     <h4>Question-{{ $key + 1 }}</h4>

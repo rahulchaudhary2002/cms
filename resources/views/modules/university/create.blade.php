@@ -15,7 +15,7 @@
     <form action="{{ route('university.store') }}" method="POST">
         @csrf
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex-space-between">
                         <h1 class="card-title">Create University</h1>

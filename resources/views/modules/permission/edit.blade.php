@@ -61,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-6 col-sm-12">
             <div class="card">
                 <div class="card-header d-flex-space-between">
                     <label for="roles">Roles</label>

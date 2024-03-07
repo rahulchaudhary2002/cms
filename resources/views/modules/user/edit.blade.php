@@ -151,7 +151,7 @@
                 </div>
                 @foreach($permissionsGroups as $type => $data)
                 @php $subset = $data->pluck('id')->toArray(); @endphp
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-12">
                     <div class="card">
                         <div class="card-header d-flex-space-between">
                             <div class="checkbox">

@@ -175,7 +175,7 @@
             </a>
         </li>
         @endif
-        @if(auth()->user()->can('examination.view'))
+        @if(auth()->user()->can('examination-stage.view'))
         <li class="{{ request()->is('examination/*') ? 'active' : '' }}">
             <a href="javascript:;">
                 <span class="sidebar-menu-item">

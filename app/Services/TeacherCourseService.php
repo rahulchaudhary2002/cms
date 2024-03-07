@@ -8,6 +8,7 @@ use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\TeacherCourseRepositoryInterface;
 use App\Interfaces\TeacherRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Traits\AcademicYearTrait;
 use App\Traits\CourseTrait;
 use App\Traits\ProgramTrait;
@@ -17,6 +18,7 @@ class TeacherCourseService
 {
     use AcademicYearTrait, ProgramTrait, SessionTrait, CourseTrait;
     
+    private UserRepositoryInterface $userRepository;
     private TeacherCourseRepositoryInterface $teacherCourseRepository;
     private TeacherRepositoryInterface $teacherRepository;
     private AcademicYearRepositoryInterface $academicYearRepository;
@@ -24,7 +26,9 @@ class TeacherCourseService
     private CourseRepositoryInterFace $courseRepository;
     private ProgramRepositoryInterFace $programRepository;
 
-    public function __construct(TeacherCourseRepositoryInterface $teacherCourseRepository, TeacherRepositoryInterface $teacherRepository, AcademicYearRepositoryInterface $academicYearRepository, SessionRepositoryInterface $sessionRepository, CourseRepositoryInterFace $courseRepository, ProgramRepositoryInterFace $programRepository) {
+    public function __construct(UserRepositoryInterface $userRepository, TeacherCourseRepositoryInterface $teacherCourseRepository, TeacherRepositoryInterface $teacherRepository, AcademicYearRepositoryInterface $academicYearRepository, SessionRepositoryInterface $sessionRepository, CourseRepositoryInterFace $courseRepository, ProgramRepositoryInterFace $programRepository)
+    {
+        $this->userRepository = $userRepository;
         $this->teacherCourseRepository = $teacherCourseRepository;
         $this->teacherRepository = $teacherRepository;
         $this->academicYearRepository = $academicYearRepository;

@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-md-12">
                             <strong>Answer</strong>
-                            <div class="d-flex-space-between">
+                            <div class="d-flex-space-between gap-1">
                                 @php
                                 $answer = getAnswer($question, $submission->id);
                                 $files = json_decode($answer->uploads) ?? [];

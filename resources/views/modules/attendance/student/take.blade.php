@@ -23,7 +23,7 @@
                 <div class="card-body expand">
                     <form action="{{ url()->current() }}" id="search-attendance-form" method="GET">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="academicYear">Acacemic Year <span class="text-danger">*</span></label>
                                     <select class="form-control" name="academic_year" id="academicYear"  data-init-plugin="select2">
@@ -35,7 +35,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="program">Program <span class="text-danger">*</span></label>
                                     <select class="form-control" name="program" id="program"  data-init-plugin="select2" data-semesters="{{ $semesters }}">
@@ -47,7 +47,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="semester">Semester <span class="text-danger">*</span></label>
                                     <select class="form-control" name="semester" id="semester"  data-init-plugin="select2" data-semesterKey="{{ request()->get('semester') }}" data-sessions="{{ $sessions }}" data-courses="{{ $courses }}">
@@ -55,7 +55,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="session">Session <span class="text-danger">*</span></label>
                                     <select class="form-control" name="session" id="session"  data-init-plugin="select2" data-sessionKey="{{ request()->get('session') }}">
@@ -63,7 +63,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="course">Course <span class="text-danger">*</span></label>
                                     <select class="form-control" name="course" id="course"  data-init-plugin="select2" data-courseKey="{{ request()->get('course') }}">
@@ -71,7 +71,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="date">Date <span class="text-danger">*</span></label>
                                     <input class="form-control" type="date" name="date" id="date" value="{{ request()->get('date') }}">
