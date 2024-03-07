@@ -9,7 +9,7 @@
             <a href="#"><span class="fa fa-envelope"></span> <span class="badge badge-primary">5</span></a>
         </div>
         <div class="dropdown">
-            <a class="user dropdown-toggle" href="javascript:void(0)">
+            <a class="user dropdown-toggle" href="javascript:;">
                 <div class="user-img">
                     <img src="{{ auth()->user()->image ? asset('storage/users/'.auth()->user()->image) : asset('assets/images/noimage.jpg') }}">
                 </div>
@@ -19,10 +19,9 @@
                 </div>
             </a>
             <ul class="dropdown-menu dropdown-right">
-                <li class="dropdown-item" onclick="event.preventDefault(); document.getElementById('profile-form').submit();"><a class="dropdown-toggle" href="{{ route('profile') }}"><span class="fa fa-user"></span> Profile</a></li>
+                <li class="dropdown-item"><a class="dropdown-toggle" href="{{ route('profile') }}"><span class="fa fa-user"></span> Profile</a></li>
                 <li class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><a href="javascript:;"><span class="fa fa-sign-out"></span> Logout</a></li>
             </ul>
-            <form id="profile-form" action="{{ route('profile') }}" method="get"></form>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>
         </div>
     </div>

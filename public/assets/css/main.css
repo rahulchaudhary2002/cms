@@ -496,13 +496,8 @@ form .row>div:last-child {
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: 0.7rem 1.5rem;
-    clear: both;
+    padding: 0.6rem 1.5rem;
     font-weight: 400;
-    color: #212529;
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
     border: 0;
 }
 

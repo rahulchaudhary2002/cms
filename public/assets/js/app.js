@@ -41,9 +41,18 @@ $(document).ready(function() {
         $(this).closest('.card').parent().addClass('hide').slideUp();
     });
 
+    $(document).on('click', function() {
+        $('.dropdown-menu.active').removeClass('active');
+    });
+    
     $('.dropdown').on('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         $(this).children('.dropdown-menu').toggleClass('active');
+    });
+
+    $('.dropdown-item').on('click', function() {
+        window.location.href = $(this).find('a').attr('href');
     });
 
     $('.accordion a').on('click', function() {

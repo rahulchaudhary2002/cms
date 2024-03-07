@@ -175,5 +175,38 @@
             </a>
         </li>
         @endif
+        @if(auth()->user()->can('examination.view'))
+        <li class="{{ request()->is('examination/*') ? 'active' : '' }}">
+            <a href="javascript:;">
+                <span class="sidebar-menu-item">
+                    <span class="fa fa-book-reader"></span>
+                    <span class="sidebar-menu-text">Examination</span>
+                </span>
+                <span class="fa fa-angle-left"></span>
+            </a>
+            <ul class="sidebar-sub-menu {{ request()->is('examination/*') ? 'expand' : '' }}">
+                @if(auth()->user()->can('examination-stage.view'))
+                <li class="{{ request()->is('examination/stage') || request()->is('exmination/stage/*') ? 'active' : '' }}">
+                    <a href="{{ route('examination.stage.index') }}" class="{{ request()->is('examination/stage') || request()->is('exmination/stage/*') ? 'active' : '' }}">
+                        <span class="sidebar-menu-item">
+                            <span class="fa fa-circle"></span>
+                            <span class="sidebar-menu-text">Stage</span>
+                        </span>
+                    </a>
+                </li>
+                @endif
+                @if(auth()->user()->can('examination-record.view'))
+                <li class="{{ request()->is('examination/record') || request()->is('exmination/record/*') ? 'active' : '' }}">
+                    <a href="{{ route('examination.record.index') }}" class="{{ request()->is('examination/record') || request()->is('exmination/record/*') ? 'active' : '' }}">
+                        <span class="sidebar-menu-item">
+                            <span class="fa fa-circle"></span>
+                            <span class="sidebar-menu-text">Record</span>
+                        </span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+        </li>
+        @endif
     </ul>
 </div>

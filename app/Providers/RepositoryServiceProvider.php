@@ -8,6 +8,7 @@ use App\Interfaces\AssignmentQuestionRepositoryInterface;
 use App\Interfaces\AssignmentRepositoryInterface;
 use App\Interfaces\AssignmentSubmissionRepositoryInterface;
 use App\Interfaces\CourseRepositoryInterFace;
+use App\Interfaces\ExaminationStageRepositoryInterface;
 use App\Interfaces\PermissionRepositoryInterface;
 use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\RoleRepositoryInterface;
@@ -27,6 +28,7 @@ use App\Repositories\AssignmentQuestionRepository;
 use App\Repositories\AssignmentRepository;
 use App\Repositories\AssignmentSubmissionRepository;
 use App\Repositories\CourseRepository;
+use App\Repositories\ExaminationStageRepository;
 use App\Repositories\PermissionRepository;
 use App\Repositories\ProgramRepository;
 use App\Repositories\RoleRepository;
@@ -68,6 +70,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AssignmentQuestionRepositoryInterface::class, AssignmentQuestionRepository::class);
         $this->app->bind(AssignmentSubmissionRepositoryInterface::class, AssignmentSubmissionRepository::class);
         $this->app->bind(AssignmentAnswerRepositoryInterface::class, AssignmentAnswerRepository::class);
+        $this->app->bind(ExaminationStageRepositoryInterface::class, ExaminationStageRepository::class);
     }
 
     /**

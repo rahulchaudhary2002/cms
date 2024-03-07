@@ -11,6 +11,6 @@ class CheckAssignmentSubmissionPolicy extends BasePolicy
 
     public function create(User $user)
     {
-        return $this->getPermission($user, 'check-assignment');
+        return $this->getPermission($user, 'check-submission');
     }
 }

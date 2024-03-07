@@ -72,6 +72,10 @@ return [
         'assignment/submission/checking/*',
         'assignment/upload-file',
         'assignment/remove-file',
+        'examination/stage/create',
+        'examination/stage/store',
+        'examination/stage/edit/*',
+        'examination/stage/update/*',
     ],
 
     'roles' => [
@@ -152,10 +156,19 @@ return [
             'view assignment',
             'create assignment',
             'update assignment',
+            'submit assignment',
+        ],
+
+        'assignment-submission' => [
             'view all submission',
             'view submission',
-            'submit assignment',
-            'check assignment'
+            'check submission'
+        ],
+
+        'examination-stage' => [
+            'view examination stage',
+            'create examination stage',
+            'update examination stage',
         ],
     ]
 ];

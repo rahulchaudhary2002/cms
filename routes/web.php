@@ -3,6 +3,7 @@
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ExaminationStageController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProgramController;
@@ -151,6 +152,24 @@ Route::middleware(['auth', 'checkPermission'])->group(function () {
             Route::get('/show/{key}/{student_key}', [AssignmentController::class, 'showSubmission'])->name('show')->middleware('can:assignment-submission.view');
             Route::get('/check/{key}/{student_key}', [AssignmentController::class, 'check'])->name('check')->middleware('can:check-assignment-submission.create');
             Route::put('/checking/{key}/{student_key}', [AssignmentController::class, 'checking'])->name('checking')->middleware('can:check-assignment-submission.create');
+        });
+    });
+
+    Route::name('examination.')->prefix('examination')->group(function () {
+        Route::name('stage.')->prefix('stage')->group(function () {
+            Route::get('/', [ExaminationStageController::class, 'index'])->name('index')->middleware('can:examination-stage.view');
+            Route::get('/create', [ExaminationStageController::class, 'create'])->name('create')->middleware('can:examination-stage.create');
+            Route::post('/store', [ExaminationStageController::class, 'store'])->name('store')->middleware('can:examination-stage.create');
+            Route::get('/edit/{key}', [ExaminationStageController::class, 'edit'])->name('edit')->middleware('can:examination-stage.update');
+            Route::put('/update/{key}', [ExaminationStageController::class, 'update'])->name('update')->middleware('can:examination-stage.update');
+        });
+
+        Route::name('record.')->prefix('record')->group(function () {
+            Route::get('/', [ExaminationStageController::class, 'index'])->name('index')->middleware('can:examination-record.view');
+            Route::get('/create', [ExaminationStageController::class, 'create'])->name('create')->middleware('can:examination-record.create');
+            Route::post('/store', [ExaminationStageController::class, 'store'])->name('store')->middleware('can:examination-record.create');
+            Route::get('/edit/{key}', [ExaminationStageController::class, 'edit'])->name('edit')->middleware('can:examination-record.update');
+            Route::put('/update/{key}', [ExaminationStageController::class, 'update'])->name('update')->middleware('can:examination-record.update');
         });
     });
 });

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\AcademicYear;
 use App\Models\Assignment;
 use App\Models\Course;
+use App\Models\ExaminationStage;
 use App\Models\Permission;
 use App\Models\Program;
 use App\Models\Role;
@@ -15,6 +16,7 @@ use App\Models\User;
 use App\Observers\AcademicYearObserver;
 use App\Observers\AssignmentObserver;
 use App\Observers\CourseObserver;
+use App\Observers\ExaminationStageObserver;
 use App\Observers\PermissionObserver;
 use App\Observers\ProgramObserver;
 use App\Observers\RoleObserver;
@@ -55,6 +57,7 @@ class EventServiceProvider extends ServiceProvider
         Course::observe(CourseObserver::class);
         Session::observe(SessionObserver::class);
         Assignment::observe(AssignmentObserver::class);
+        ExaminationStage::observe(ExaminationStageObserver::class);
     }
 
     /**
