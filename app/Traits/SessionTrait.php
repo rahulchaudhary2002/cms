@@ -4,6 +4,11 @@ namespace App\Traits;
 
 trait SessionTrait
 {
+    public function getSessionsWithAcademicYearAndSemester()
+    {
+        return $this->sessionRepository->getWithRelation(['academicYear', 'semester']);
+    }
+    
     public function getSessionsWithAcademicYearSemesterAndProgram()
     {
         $user = $this->userRepository->getById(auth()->user()->id);
