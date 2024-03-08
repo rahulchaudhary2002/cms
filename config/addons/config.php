@@ -45,6 +45,8 @@ return [
         'semester/edit/*',
         'semester/update/*',
         'semester/assign/*',
+        'semester/change',
+        'semester/change/update',
         'course',
         'course/create',
         'course/store',
@@ -148,11 +150,6 @@ return [
             'assign course',
         ],
 
-        'attendance' => [
-            'view attendance',
-            'take attendance',
-        ],
-
         'assignment' => [
             'view assignment',
             'create assignment',
@@ -170,6 +167,11 @@ return [
             'view examination stage',
             'create examination stage',
             'update examination stage',
+        ],
+
+        'attendance' => [
+            'view attendance',
+            'take attendance',
         ],
     ]
 ];

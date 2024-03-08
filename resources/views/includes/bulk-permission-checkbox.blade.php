@@ -1,5 +1,5 @@
 @php if(isset($permissions)) { $supersubset = $permissions->pluck('id')->toArray(); }@endphp
-<div class="col-md-12">
+<div class="col-md-12 mb-2">
     <div class="d-flex-space-between">
         <label class="mt-2">Permissions</label>
         <div class="checkbox mt-2">
