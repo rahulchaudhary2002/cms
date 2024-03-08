@@ -7,9 +7,11 @@ use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Jobs\SessionCreatedJob;
 use App\Traits\AcademicYearTrait;
 use App\Traits\ProgramTrait;
 use App\Traits\SemesterTrait;
+use Exception;
 
 class SessionService
 {
@@ -21,7 +23,8 @@ class SessionService
     private SemesterRepositoryInterFace $semesterRepository;
     private UserRepositoryInterface $userRepository;
 
-    public function __construct(SessionRepositoryInterface $sessionRepository, AcademicYearRepositoryInterface $academicYearRepository, ProgramRepositoryInterFace $programRepository, SemesterRepositoryInterFace $semesterRepository, UserRepositoryInterface $userRepository) {
+    public function __construct(SessionRepositoryInterface $sessionRepository, AcademicYearRepositoryInterface $academicYearRepository, ProgramRepositoryInterFace $programRepository, SemesterRepositoryInterFace $semesterRepository, UserRepositoryInterface $userRepository)
+    {
         $this->sessionRepository = $sessionRepository;
         $this->academicYearRepository = $academicYearRepository;
         $this->programRepository = $programRepository;
@@ -41,11 +44,19 @@ class SessionService
 
     public function createSession($request)
     {
-        return $this->sessionRepository->create($request);
+        $session = $this->sessionRepository->create($request);
+        $users = $this->userRepository->model()->whereHas('student', function ($query) use ($request) {
+            $query->where('academic_year_id', $request->academic_year)
+                ->where('program_id', $request->program);
+        })->get();
+
+        dispatch(new SessionCreatedJob($users));
+
+        return $session;
     }
 
     public function updateSession($request, $key)
     {
-        return $this->sessionRepository->update($request, $key); 
+        return $this->sessionRepository->update($request, $key);
     }
 }
