@@ -13,6 +13,7 @@ return [
         'student/store',
         'student/edit/*',
         'student/update/*',
+        'student/show/*',
         'role',
         'role/create',
         'role/store',

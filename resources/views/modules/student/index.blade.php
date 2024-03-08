@@ -98,7 +98,7 @@
                                 <td>{{ $student->student->semester->semester->name ?? 'N/A' }}</td>
                                 <td>
                                     <a class="text-success mr-1" href="{{ route('student.show', $student->key) }}"><span class="fa fa-eye"></span></a>
-                                    @if(auth()->user()->can('student.edit'))
+                                    @if(auth()->user()->can('student.update'))
                                     <a class="text-danger" title="Edit" href="{{ route('student.edit', $student->key) }}"><span class="fa fa-edit"></span></a>
                                     @endif
                                     @if(auth()->user()->can('assign-semester.create'))

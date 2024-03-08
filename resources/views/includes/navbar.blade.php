@@ -20,6 +20,9 @@
             </a>
             <ul class="dropdown-menu dropdown-right">
                 <li class="dropdown-item"><a class="dropdown-toggle" href="{{ route('profile') }}"><span class="fa fa-user"></span> Profile</a></li>
+                @if(auth()->user()->hasRole('student'))
+                <li class="dropdown-item"><a class="dropdown-toggle" href="{{ route('semester.change') }}"><span class="fa fa-edit"></span> Change Semester</a></li>
+                @endif
                 <li class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><a href="javascript:;"><span class="fa fa-sign-out"></span> Logout</a></li>
             </ul>
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form>

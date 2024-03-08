@@ -70,7 +70,7 @@ class SessionRepository implements SessionRepositoryInterface
 
     public function getByActive($academicYear, $semester)
     {
-        return Session::where('is_active', 1)->where('academic_year_id', $academicYear)->where('semester_id', $semester)->firstOrFail();
+        return Session::where('is_active', 1)->where('academic_year_id', $academicYear)->where('semester_id', $semester)->first();
     }
 
     public function create($request)

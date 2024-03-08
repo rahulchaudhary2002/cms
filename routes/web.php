@@ -114,6 +114,8 @@ Route::middleware(['auth', 'checkPermission'])->group(function () {
             Route::get('/{student_key}', [StudentSemesterController::class, 'create'])->name('create')->middleware('can:assign-semester.create');
             Route::post('/{student_key}', [StudentSemesterController::class, 'store'])->name('store')->middleware('can:assign-semester.create');
         });
+        Route::get('/change', [StudentSemesterController::class, 'edit'])->name('change');
+        Route::post('/change/{student_key}', [StudentSemesterController::class, 'update'])->name('change.update');
     });
 
     Route::name('course.')->prefix('course')->group(function () {

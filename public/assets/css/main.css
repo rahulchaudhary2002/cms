@@ -473,7 +473,7 @@ form .row>div:last-child {
     display: none;
     position: absolute;
     z-index: 1000;
-    min-width: 12rem;
+    min-width: 13rem;
     padding: 7px 0;
     font-size: 1rem;
     color: #212529;

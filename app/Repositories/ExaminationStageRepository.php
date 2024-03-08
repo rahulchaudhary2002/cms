@@ -15,6 +15,34 @@ class ExaminationStageRepository implements ExaminationStageRepositoryInterface
         
         $examinationStages = ExaminationStage::select('*');
 
+        if ($request->name) {
+            $examinationStages = $examinationStages->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+
+        if ($request->academic_year) {
+            $examinationStages = $examinationStages->whereHas('academicYear', function ($query) use ($request) {
+                return $query->where('key', $request->academic_year);
+            });
+        }
+
+        if ($request->program) {
+            $examinationStages = $examinationStages->whereHas('program', function ($query) use ($request) {
+                return $query->where('key', $request->program);
+            });
+        }
+
+        if ($request->semester) {
+            $examinationStages = $examinationStages->whereHas('semester', function ($query) use ($request) {
+                return $query->where('key', $request->semester);
+            });
+        }
+
+        if ($request->session) {
+            $examinationStages = $examinationStages->whereHas('session', function ($query) use ($request) {
+                return $query->where('key', $request->session);
+            });
+        }
+
         $totalRecords = $this->count($examinationStages);
         $examinationStages = $examinationStages->skip($skip)->take($perPage)->get();
         

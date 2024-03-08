@@ -186,8 +186,8 @@
             </a>
             <ul class="sidebar-sub-menu {{ request()->is('examination/*') ? 'expand' : '' }}">
                 @if(auth()->user()->can('examination-stage.view'))
-                <li class="{{ request()->is('examination/stage') || request()->is('exmination/stage/*') ? 'active' : '' }}">
-                    <a href="{{ route('examination.stage.index') }}" class="{{ request()->is('examination/stage') || request()->is('exmination/stage/*') ? 'active' : '' }}">
+                <li class="{{ request()->is('examination/stage') || request()->is('examination/stage/*') ? 'active' : '' }}">
+                    <a href="{{ route('examination.stage.index') }}" class="{{ request()->is('examination/stage') || request()->is('examination/stage/*') ? 'active' : '' }}">
                         <span class="sidebar-menu-item">
                             <span class="fa fa-circle"></span>
                             <span class="sidebar-menu-text">Stage</span>
@@ -196,8 +196,8 @@
                 </li>
                 @endif
                 @if(auth()->user()->can('examination-record.view'))
-                <li class="{{ request()->is('examination/record') || request()->is('exmination/record/*') ? 'active' : '' }}">
-                    <a href="{{ route('examination.record.index') }}" class="{{ request()->is('examination/record') || request()->is('exmination/record/*') ? 'active' : '' }}">
+                <li class="{{ request()->is('examination/record') || request()->is('examination/record/*') ? 'active' : '' }}">
+                    <a href="{{ route('examination.record.index') }}" class="{{ request()->is('examination/record') || request()->is('examination/record/*') ? 'active' : '' }}">
                         <span class="sidebar-menu-item">
                             <span class="fa fa-circle"></span>
                             <span class="sidebar-menu-text">Record</span>

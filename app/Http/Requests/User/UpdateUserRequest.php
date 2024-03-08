@@ -24,7 +24,7 @@ class UpdateUserRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'mobile' => 'required',
+            'mobile' => 'required|min:10',
             'email' => 'required|unique:users,email,' . $this->key . ',key',
             'roles' => 'required|array',
             'roles.*' => 'required|exists:roles,id',

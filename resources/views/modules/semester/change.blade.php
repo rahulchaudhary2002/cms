@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Assign Semester')
+@section('title', 'Change Semester')
 
 @section('breadcrumb')
 <ul class="breadcrumb">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('student.index') }}">Student</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('semester.index') }}">Semester</a></li>
-    <li class="breadcrumb-item">Assign</li>
+    <li class="breadcrumb-item">Change Semester</li>
 </ul>
 @endsection
 
@@ -20,15 +18,15 @@
         </div>
     </div>
     @else
-    <form action="{{ route('semester.assign.store', $user->key) }}" method="POST">
+    <form action="{{ route('semester.change.update', $user->key) }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex-space-between">
-                        <h1 class="card-title">Assign Semester</h1>
+                        <h1 class="card-title">Change Semester</h1>
                         <div class="card-setting d-flex gap-2">
-                            <a class="text-danger" href="{{ route('student.index') }}"><span class="fa fa-arrow-left"></span></a>
+                            <a class="text-danger" href="{{ route('dashboard') }}"><span class="fa fa-arrow-left"></span></a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -36,13 +34,13 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Student Name</label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}" readonly>
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ $user->name }}" readonly >
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="program">Program</label>
-                                    <select class="form-control" name="program" id="program" data-init-plugin="select2">
+                                    <select class="form-control" name="program" id="program"  data-init-plugin="select2">
                                         <option value="{{ $user->student->program->id }}">{{ $user->student->program->name }}</option>
                                     </select>
                                     @error('program')
@@ -53,7 +51,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="semester">Semester</label>
-                                    <select class="form-control" name="semester" id="semester" data-init-plugin="select2">
+                                    <select class="form-control" name="semester" id="semester"  data-init-plugin="select2">
                                         <option value="{{ $semester->id }}">{{ $semester->name }}</option>
                                     </select>
                                     @error('semester')
@@ -64,7 +62,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="session">Session</label>
-                                    <select class="form-control" name="session" id="session" data-init-plugin="select2">
+                                    <select class="form-control" name="session" id="session"  data-init-plugin="select2">
                                         <option value="{{ $session->id }}">{{ $session->name }}</option>
                                     </select>
                                     @error('session')

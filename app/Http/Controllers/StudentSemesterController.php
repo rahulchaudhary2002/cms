@@ -36,4 +36,26 @@ class StudentSemesterController extends Controller
         }
         return redirect()->route('student.index')->with('error', 'Semester is not assigned to ' . $request->name . '.');
     }
+
+    public function edit()
+    {
+        $user = $this->studentSemesterService->getUserByKey(auth()->user()->key);
+
+        if (!$user->hasRole('student')) {
+            abort(404);
+        }
+
+        $semester = $this->studentSemesterService->getSemester($user->student);
+        $session = $this->studentSemesterService->getActiveSession($user->student->academic_year_id, $semester);
+
+        return view('modules.semester.change', compact('user', 'semester', 'session'));
+    }
+
+    public function update(AssignSemesterRequest $request, $user_key)
+    {
+        if ($this->studentSemesterService->assignSemesters($request, $user_key)) {
+            return redirect()->route('dashboard')->with('success', 'Semester is changed.');
+        }
+        return redirect()->route('dashboard')->with('error', 'Semester is not changed.');
+    }
 }

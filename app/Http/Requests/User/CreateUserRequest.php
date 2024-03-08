@@ -23,7 +23,7 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'name' => ['required'],
-            'mobile' => 'required',
+            'mobile' => 'required|min:10',
             'email' => ['required', 'unique:users,email',],
             'roles' => 'required|array',
             'roles.*' => 'required|exists:roles,id',
