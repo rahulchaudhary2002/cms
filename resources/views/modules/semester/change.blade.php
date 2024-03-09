@@ -73,7 +73,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Courses <span class="text-danger">*</span></label>
-                                    <div class="row mt-2">
+                                    <div class="row gap-1 mt-2">
                                         @foreach($semester->compulsoryCourses as $key => $course)
                                         <div class="col-md-4 col-sm-12 checkbox">
                                             <input class="check-course" type="checkbox" name="courses[]" value="{{ $course->id }}" id="course-{{ $key }}" checked disabled>

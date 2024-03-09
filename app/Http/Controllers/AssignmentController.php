@@ -97,6 +97,10 @@ class AssignmentController extends Controller
 
     public function createSubmission($key)
     {
+        if(!auth()->user()->student) {
+            abort(404);
+        }
+
         $assignment = $this->assignmentService->getAssignmentByKey($key);
         
         if($assignment->authSubmission) {

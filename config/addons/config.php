@@ -46,7 +46,7 @@ return [
         'semester/update/*',
         'semester/assign/*',
         'semester/change',
-        'semester/change/update',
+        'semester/change/*',
         'course',
         'course/create',
         'course/store',

@@ -1,7 +1,7 @@
 <x-mail::message>
 # Hello! {{ $user->name }}
 
-This is to notify that the next semester form is now opened. Now you can register to next semester clicking "Change Semester" button below.
+This is to notify that the {{ $session->semester->name }} form is now opened. Now you can register to {{ $session->semester->name }} clicking "Change Semester" button below.
 
 <x-mail::button :url="$url">
 Change Semester

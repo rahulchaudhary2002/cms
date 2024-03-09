@@ -12,6 +12,7 @@ use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Jobs\AssignmentCreatedJob;
 use App\Traits\AcademicYearTrait;
 use App\Traits\CourseTrait;
 use App\Traits\ProgramTrait;
@@ -71,6 +72,17 @@ class AssignmentService
                 $assignment = $this->assignmentRepository->create($request);
                 $this->assignmentQuestionRepository->create($request, $assignment->id);
             });
+
+            $users = $this->userRepository->model()->whereHas('student', function ($query) use ($request) {
+                $query->where('academic_year_id', $request->academic_year)
+                    ->where('program_id', $request->program)
+                    ->whereHas('semesters', function ($query) use ($request) {
+                        $query->where('semester_id', $request->semester)
+                            ->where('session_id', $request->session);
+                    });
+            })->get();
+
+            dispatch(new AssignmentCreatedJob($users, $assignment, auth()->user()->name));
 
             return $assignment;
         } catch (Exception $e) {

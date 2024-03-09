@@ -9,6 +9,7 @@ use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\TeacherCourseRepositoryInterface;
 use App\Interfaces\TeacherRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Jobs\CourseAssignedJob;
 use App\Traits\AcademicYearTrait;
 use App\Traits\CourseTrait;
 use App\Traits\ProgramTrait;
@@ -45,7 +46,10 @@ class TeacherCourseService
     public function assignCourse($request, $user_key)
     {
         $user = $this->getTeacherByKey($user_key);
+        $course = $this->teacherCourseRepository->assign($request, $user->teacher->id);
 
-        return $this->teacherCourseRepository->assign($request, $user->teacher->id);
+        dispatch(new CourseAssignedJob($user, $course));
+
+        return $course;
     }
 }

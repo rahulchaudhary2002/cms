@@ -11,7 +11,6 @@ use App\Jobs\SessionCreatedJob;
 use App\Traits\AcademicYearTrait;
 use App\Traits\ProgramTrait;
 use App\Traits\SemesterTrait;
-use Exception;
 
 class SessionService
 {
@@ -50,7 +49,7 @@ class SessionService
                 ->where('program_id', $request->program);
         })->get();
 
-        dispatch(new SessionCreatedJob($users));
+        dispatch(new SessionCreatedJob($users, $session));
 
         return $session;
     }

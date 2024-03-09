@@ -9,20 +9,20 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SessionCreatedMail extends Mailable
+class CourseAssignedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     private $user;
-    private $session;
+    private $course;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($user, $session)
+    public function __construct($user, $course)
     {
         $this->user = $user;
-        $this->session = $session;
+        $this->course = $course;
     }
 
     /**
@@ -31,7 +31,7 @@ class SessionCreatedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Semester Form Opened',
+            subject: 'Course Assigned Mail',
         );
     }
 
@@ -41,11 +41,11 @@ class SessionCreatedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.session_created',
-            with:[
-                'url' => route('semester.change'),
+            markdown: 'emails.course_assigned',
+            with: [
+                'url' => route('profile'),
                 'user' => $this->user,
-                'session' => $this->session
+                'course' => $this->course
             ]
         );
     }

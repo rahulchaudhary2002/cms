@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Mail\SessionCreatedMail;
+use App\Mail\AssignmentCreatedMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,20 +11,22 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class SessionCreatedJob implements ShouldQueue
+class AssignmentCreatedJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     private $users = [];
-    private $session;
+    private $assignment;
+    private $createdBy;
 
     /**
      * Create a new job instance.
      */
-    public function __construct($users, $session)
+    public function __construct($users, $assignment, $createdBy)
     {
         $this->users = $users;
-        $this->session = $session;
+        $this->assignment = $assignment;
+        $this->createdBy = $createdBy;
     }
 
     /**
@@ -32,8 +34,8 @@ class SessionCreatedJob implements ShouldQueue
      */
     public function handle(): void
     {
-        foreach($this->users as $user) {
-            Mail::to($user->email)->send(new SessionCreatedMail($user, $this->session));
+        foreach ($this->users as $user) {
+            Mail::to($user->email)->send(new AssignmentCreatedMail($user, $this->assignment, $this->createdBy));
         }
     }
 }

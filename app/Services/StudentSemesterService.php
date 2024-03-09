@@ -7,6 +7,7 @@ use App\Interfaces\SessionRepositoryInterface;
 use App\Interfaces\StudentCourseRepositoryInterface;
 use App\Interfaces\StudentRepositoryInterface;
 use App\Interfaces\StudentSemesterRepositoryInterface;
+use App\Jobs\SemesterChangedJob;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -59,6 +60,20 @@ class StudentSemesterService
                 $this->studentCourseRepository->assign($request, $semester, $user->student->id);
             });
 
+            $message = 'You are promoted to ' . $semester->name . ' by ' . $request->user()->name . '. Your courses in this semester.';
+            
+            if($request->user()->hasRole('student')) {
+                $message = 'You have successfully registred to ' . $semester->name . '. Your courses in this semester.';
+            }
+            
+            $data = (object) [
+                'message' => $message,
+                'user' => $user,
+                'semester' => $semester
+            ];
+
+            dispatch(new SemesterChangedJob($data));
+            
             return true;
         } catch (Exception $e) {
             return false;
