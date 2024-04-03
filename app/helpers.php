@@ -34,3 +34,21 @@ if (!function_exists('getAnswer')) {
 			->where('assignment_question_id', $question->id)->first();
 	}
 }
+
+if (!function_exists('examinationRecords')) {
+	function examinationRecord($student, $examination_stage)
+	{
+		return $student->student->examinationRecords()->whereHas('examinationStage', function ($query) use ($examination_stage) {
+			$query->where('name', $examination_stage);
+		})->first();
+	}
+}
+
+if (!function_exists('studentCourses')) {
+	function studentCourses($student, $examination_stage)
+	{
+		return $student->student->studentCourses()->whereHas('course', function ($query) use ($examination_stage) {
+			$query->where('semester_id', $examination_stage->semester_id);
+		})->get();
+	}
+}

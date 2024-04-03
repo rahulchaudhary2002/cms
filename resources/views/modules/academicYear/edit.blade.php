@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row mt-2 mb-2">
+                        <div class="row mb-2">
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>

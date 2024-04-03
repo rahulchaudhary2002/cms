@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="row mt-2 mb-2">
+                        <div class="row mb-2">
                             <div class="col-md-3 col-sm-12">
                                 <div class="row">
                                     <div class="col-md-12" style="margin: auto;">
@@ -89,7 +89,7 @@
                         <h4>Contact Information</h4>
                     </div>
                     <div class="card-body">
-                        <div class="row mt-2 mb-2">
+                        <div class="row mb-2">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="mobile">Mobile <span class="text-danger">*</span></label>
@@ -136,7 +136,7 @@
                         <h4>Student Course Information</h4>
                     </div>
                     <div class="card-body">
-                        <div class="row mt-2 mb-2">
+                        <div class="row mb-2">
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="academic-year">Academic Year <span class="text-danger">*</span></label>

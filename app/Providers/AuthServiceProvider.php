@@ -9,6 +9,7 @@ use App\Policies\AssignmentSubmissionPolicy;
 use App\Policies\AssignSemesterPolicy;
 use App\Policies\CheckAssignmentSubmissionPolicy;
 use App\Policies\CoursePolicy;
+use App\Policies\ExaminationRecordPolicy;
 use App\Policies\ExaminationStagePolicy;
 use App\Policies\PermissionPolicy;
 use App\Policies\ProgramPolicy;
@@ -57,6 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('assignment-submission', AssignmentSubmissionPolicy::class);
         Gate::resource('check-assignment-submission', CheckAssignmentSubmissionPolicy::class);
         Gate::resource('examination-stage', ExaminationStagePolicy::class);
+        Gate::resource('examination-record', ExaminationRecordPolicy::class);
 
         Gate::before(function ($user, $ability) {
             return $user->hasRole('superadmin') ? true : null;

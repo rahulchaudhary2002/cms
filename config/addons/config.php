@@ -75,10 +75,17 @@ return [
         'assignment/submission/checking/*',
         'assignment/upload-file',
         'assignment/remove-file',
+        'examination/stage',
         'examination/stage/create',
         'examination/stage/store',
         'examination/stage/edit/*',
         'examination/stage/update/*',
+        'examination/record',
+        'examination/record/create/*/*',
+        'examination/record/store/*/*',
+        'examination/record/edit/*/*',
+        'examination/record/update/*/*',
+        'examination/record/show/*/*',
     ],
 
     'roles' => [
@@ -167,6 +174,13 @@ return [
             'view examination stage',
             'create examination stage',
             'update examination stage',
+        ],
+
+        'examination-record' => [
+            'view all examination record',
+            'view examination record',
+            'create examination record',
+            'update examination record',
         ],
 
         'attendance' => [
