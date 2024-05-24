@@ -24,11 +24,9 @@ trait SessionTrait
         }
 
         if ($user->hasRole('student')) {
-            // return $this->sessionRepository->model()->with(['academicYear', 'semester', 'program'])->whereHas('studentSemesters', function ($query) use ($user) {
-            //     $query->where('student_id', $user->student->id);
-            // })->get();
-
-            return [];
+            return $this->sessionRepository->model()->with(['academicYear', 'semester', 'program'])->whereHas('studentSemesters', function ($query) use ($user) {
+                $query->where('student_id', $user->student->id);
+            })->get();
         }
 
         return $this->sessionRepository->getWithRelation(['academicYear', 'semester', 'program']);

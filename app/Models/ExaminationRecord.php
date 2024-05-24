@@ -22,4 +22,9 @@ class ExaminationRecord extends Model
     {
         return $this->belongsTo(ExaminationStage::class);
     }
+
+    public function marks()
+    {
+        return $this->hasMany(ExaminationMark::class);
+    }
 }

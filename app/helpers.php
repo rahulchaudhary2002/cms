@@ -35,11 +35,11 @@ if (!function_exists('getAnswer')) {
 	}
 }
 
-if (!function_exists('examinationRecords')) {
+if (!function_exists('examinationRecord')) {
 	function examinationRecord($student, $examination_stage)
 	{
 		return $student->student->examinationRecords()->whereHas('examinationStage', function ($query) use ($examination_stage) {
-			$query->where('name', $examination_stage);
+			$query->where('key', $examination_stage);
 		})->first();
 	}
 }

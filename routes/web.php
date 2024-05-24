@@ -174,6 +174,9 @@ Route::middleware(['auth', 'checkPermission'])->group(function () {
             Route::get('/edit/{examination_stage_key}/{student_key}', [ExaminationRecordController::class, 'edit'])->name('edit')->middleware('can:examination-record.update');
             Route::put('/update/{examination_stage_key}/{student_key}', [ExaminationRecordController::class, 'update'])->name('update')->middleware('can:examination-record.update');
             Route::get('/show/{examination_stage_key}/{student_key}', [ExaminationRecordController::class, 'show'])->name('show')->middleware('can:examination-record.view');
+            Route::get('/export-template', [ExaminationRecordController::class, 'exportTemplate'])->name('template.export')->middleware('can:examination-record.create');
+            Route::get('/import', [ExaminationRecordController::class, 'importForm'])->name('import')->middleware('can:examination-record.create');
+            Route::post('/import', [ExaminationRecordController::class, 'import'])->middleware('can:examination-record.create');
         });
     });
 });

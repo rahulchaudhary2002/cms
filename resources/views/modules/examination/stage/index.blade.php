@@ -95,7 +95,7 @@
                                 <td>{{ $examinationStage->semester->name }}</td>
                                 <td>{{ $examinationStage->session->name }}</td>
                                 <td>
-                                    @if(auth()->user()->can('examination-stage.edit'))
+                                    @if(auth()->user()->can('examination-stage.update'))
                                     <a class="text-danger" href="{{ route('examination.stage.edit', $examinationStage->key) }}"><span class="fa fa-edit"></span></a>
                                     @endif
                                 </td>

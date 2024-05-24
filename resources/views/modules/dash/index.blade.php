@@ -110,62 +110,6 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <div class="card">
-                <div class="card-header d-flex-space-between">
-                    <h1 class="card-title">Notice Board</h1>
-                    <div class="card-setting d-flex gap-2">
-                        <a class="text-warning card-body-collapsed" href="#"><span class="fa fa-angle-down"></span></a>
-                        <a class="text-success card-refresh" href="#"><span class="fa fa-rotate"></span></a>
-                        <a class="text-danger card-collapsed" href="#"><span class="fa fa-xmark"></span></a>
-                    </div>
-                </div>
-                <div class="card-body expand notice-board">
-                    <div class="row mb-2">
-                        <div class="col-md-12 col-sm-12 line-height-2">
-                            <strong class="f-7 text-success">Rahul Chaudhary</strong>
-                            <small class="text-gray">9 min ago</small>
-                        </div>
-                        <div class="col-md-12 col-sm-12 line-height-normal">
-                            <p>Lorem Ipsum is a long established fact that a reader will be distracted by the
-                                readable content of a page when looking at its layout.</p>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-12 col-sm-12 line-height-2">
-                            <strong class="f-7 text-primary">Rahul Chaudhary</strong>
-                            <small class="text-gray">9 min ago</small>
-                        </div>
-                        <div class="col-md-12 col-sm-12 line-height-normal">
-                            <p>Lorem Ipsum is a long established fact that a reader will be distracted by the
-                                readable content of a page when looking at its layout.</p>
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <div class="col-md-12 col-sm-12 line-height-2">
-                            <strong class="f-7 text-warning">Rahul Chaudhary</strong>
-                            <small class="text-gray">9 min ago</small>
-                        </div>
-                        <div class="col-md-12 col-sm-12 line-height-normal">
-                            <p>Lorem Ipsum is a long established fact that a reader will be distracted by the
-                                readable content of a page when looking at its layout.</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 line-height-2">
-                            <strong class="f-7 text-danger">Rahul Chaudhary</strong>
-                            <small class="text-gray">9 min ago</small>
-                        </div>
-                        <div class="col-md-12 col-sm-12 line-height-normal">
-                            <p>Lorem Ipsum is a long established fact that a reader will be distracted by the
-                                readable content of a page when looking at its layout.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex-space-between">

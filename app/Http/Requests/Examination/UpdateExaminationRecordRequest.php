@@ -22,7 +22,21 @@ class UpdateExaminationRecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'gpa' => 'required',
+            'courses' => 'required|array',
+            'courses.*' => 'required',
+            'grades' => 'required|array',
+            'grades.*' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'courses.required' => 'The course field is required.',
+            'courses.*.required' => 'The course field is required.',
+            'grades.required' => 'The grades field is required.',
+            'grades.*.required' => 'The grades field is required.',
         ];
     }
 }

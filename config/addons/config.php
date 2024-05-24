@@ -86,6 +86,8 @@ return [
         'examination/record/edit/*/*',
         'examination/record/update/*/*',
         'examination/record/show/*/*',
+        'examination/record/export-template',
+        'examination/record/import',
     ],
 
     'roles' => [
