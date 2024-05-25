@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('registration_number')->unique();
             $table->unsignedBigInteger('academic_year_id');
             $table->unsignedBigInteger('program_id');
-            $table->boolean('is_active')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

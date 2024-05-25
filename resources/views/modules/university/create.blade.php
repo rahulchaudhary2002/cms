@@ -28,7 +28,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

@@ -100,6 +100,7 @@ class StudentRepository implements StudentRepositoryInterface
     {
         Student::create([
             'user_id' => $user_id,
+            'registration_number' => now()->year . $user_id,
             'academic_year_id' => $request->academic_year,
             'program_id' => $request->program,
         ]);
@@ -112,7 +113,7 @@ class StudentRepository implements StudentRepositoryInterface
         $student = Student::where('user_id', $user_id)->first();
 
         // $student->update([
-            
+
         // ]);
 
         return $this->getById($user_id);

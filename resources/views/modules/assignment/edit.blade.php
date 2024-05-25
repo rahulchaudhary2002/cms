@@ -116,7 +116,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-2">
                                 <div class="form-group">
                                     <label for="description">Description</label>
                                     <textarea class="form-control" name="description" id="description" data-init-plugin="ckeditor"  placeholder="Assignment Description">{!! old('description') ?? $assignment->description !!}</textarea>

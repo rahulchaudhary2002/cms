@@ -43,7 +43,7 @@
                                 <div class="form-group">
                                     <label for="program">Program</label>
                                     <select class="form-control" name="program" id="program" data-init-plugin="select2">
-                                        <option value="{{ $user->student->program->id }}">{{ $user->student->program->name }}</option>
+                                        <option value="{{ $user->student->program->id }}" selected>{{ $user->student->program->name }}</option>
                                     </select>
                                     @error('program')
                                     <span class="text-danger">{{ $message }}</span>
@@ -54,7 +54,7 @@
                                 <div class="form-group">
                                     <label for="semester">Semester</label>
                                     <select class="form-control" name="semester" id="semester" data-init-plugin="select2">
-                                        <option value="{{ $semester->id }}">{{ $semester->name }}</option>
+                                        <option value="{{ $semester->id }}" selected>{{ $semester->name }}</option>
                                     </select>
                                     @error('semester')
                                     <span class="text-danger">{{ $message }}</span>
@@ -65,7 +65,7 @@
                                 <div class="form-group">
                                     <label for="session">Session</label>
                                     <select class="form-control" name="session" id="session" data-init-plugin="select2">
-                                        <option value="{{ $session->id }}">{{ $session->name }}</option>
+                                        <option value="{{ $session->id }}" selected>{{ $session->name }}</option>
                                     </select>
                                     @error('session')
                                     <span class="text-danger">{{ $message }}</span>
@@ -95,7 +95,7 @@
                                     <div class="row mt-2">
                                         @foreach($semester->electiveCourses as $key => $course)
                                         <div class="col-md-4 col-sm-12 checkbox">
-                                            <input class="check-elective-course" type="checkbox" name="elective_courses[]" value="{{ $course->id }}" id="elective-course-{{ $key }}">
+                                            <input class="check-elective-course" type="checkbox" name="elective_courses[]" value="{{ $course->id }}" id="elective-course-{{ $key }}" @if(old('elective_courses') && in_array($course->id, old('elective_courses'))) checked @endif>
                                             <label for="elective-course-{{ $key }}">{{ $course->name }}</label>
                                         </div>
                                         @endforeach

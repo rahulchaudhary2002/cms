@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -37,7 +37,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="order">Order <span class="text-danger">*</span></label>
-                                    <input id="order" class="form-control" type="number" name="order" placeholder="Order" >
+                                    <input id="order" class="form-control" type="number" name="order" placeholder="Order" value="{{ old('order') }}">
                                     @error('order')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -46,7 +46,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="number_of_elective_courses">Number of Elective Courses</label>
-                                    <input id="number_of_elective_courses" class="form-control" type="number" name="number_of_elective_courses" placeholder="Number of Elective Courses" >
+                                    <input id="number_of_elective_courses" class="form-control" type="number" name="number_of_elective_courses" placeholder="Number of Elective Courses" value="{{ old('number_of_elective_courses') }}">
                                     @error('number_of_elective_courses')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -58,7 +58,7 @@
                                     <select class="form-control" name="program" id="program"  data-init-plugin="select2">
                                         <option value="" selected disabled>Select program</option>
                                         @foreach($programs as $program)
-                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                        <option value="{{ $program->id }}" @if($program->id == old('program')) selected @endif>{{ $program->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('program')

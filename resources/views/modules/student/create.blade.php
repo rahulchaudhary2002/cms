@@ -37,10 +37,10 @@
                         </div>
                         <div class="col-md-9 col-sm-12">
                             <div class="row">
-                                <div class="col-md-6 col-sm-12">
+                            <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="name">Name <span class="text-danger">*</span></label>
-                                        <input id="name" class="form-control" type="text" name="name" placeholder="Name">
+                                        <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                         @error('name')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -49,7 +49,7 @@
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="email">Email <span class="text-danger">*</span></label>
-                                        <input id="email" class="form-control" type="email" name="email" placeholder="Email">
+                                        <input id="email" class="form-control" type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                                         @error('email')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -58,7 +58,7 @@
                                 <div class="col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="date_of_birth">Date of Birth <span class="text-danger">*</span></label>
-                                        <input id="date_of_birth" class="form-control" type="date" name="date_of_birth">
+                                        <input id="date_of_birth" class="form-control" type="date" name="date_of_birth" value="{{ old('date_of_birth') }}">
                                         @error('date_of_birth')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -91,7 +91,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="mobile">Mobile <span class="text-danger">*</span></label>
-                                <input id="mobile" class="form-control" type="number" name="mobile" placeholder="Mobile">
+                                <input id="mobile" class="form-control" type="number" name="mobile" placeholder="Mobile" value="{{ old('mobile') }}">
                                 @error('mobile')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -100,7 +100,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="permanent-address">Permanent Address <span class="text-danger">*</span></label>
-                                <input id="permanent-address" class="form-control" type="text" name="permanent_address" placeholder="Permanent Address">
+                                <input id="permanent-address" class="form-control" type="text" name="permanent_address" placeholder="Permanent Address" value="{{ old('permanent_address') }}">
                                 @error('permanent_address')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -109,7 +109,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="temporary-address">Temporary Address <span class="text-danger">*</span></label>
-                                <input id="temporary-address" class="form-control" type="text" name="temporary_address" placeholder="Temporary Address">
+                                <input id="temporary-address" class="form-control" type="text" name="temporary_address" placeholder="Temporary Address" value="{{ old('temporary_address') }}">
                                 @error('temporary_address')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -118,7 +118,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="nationality">Nationality</label>
-                                <input id="nationality" class="form-control" type="text" name="nationality" placeholder="Nationality">
+                                <input id="nationality" class="form-control" type="text" name="nationality" placeholder="Nationality" value="{{ old('nationality') }}">
                                 @error('nationality')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -141,7 +141,7 @@
                                 <select class="form-control" name="academic_year" id="academic-year" data-init-plugin="select2">
                                     <option value="" selected disabled>Select Academic Year</option>
                                     @forelse($academicYears as $academicYear)
-                                    <option value="{{ $academicYear->id }}">{{ $academicYear->name }}</option>
+                                    <option value="{{ $academicYear->id }}" @if($academicYear->id == old('academic_year')) selected @endif>{{ $academicYear->name }}</option>
                                     @empty
                                     @endforelse
                                 </select>
@@ -156,7 +156,7 @@
                                 <select class="form-control" name="program" id="program" data-init-plugin="select2">
                                     <option value="" selected disabled>Select Program</option>
                                     @forelse($programs as $program)
-                                    <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                    <option value="{{ $program->id }}" @if($program->id == old('program')) selected @endif>{{ $program->name }}</option>
                                     @empty
                                     @endforelse
                                 </select>

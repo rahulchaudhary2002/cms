@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -40,7 +40,7 @@
                                     <select class="form-control" name="university" id="university"  data-init-plugin="select2">
                                         <option value="" selected disabled>Select university</option>
                                         @foreach($universities as $university)
-                                        <option value="{{ $university->id }}">{{ $university->name }}</option>
+                                        <option value="{{ $university->id }}" @if($university->id == old('university')) selected @endif>{{ $university->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('university')

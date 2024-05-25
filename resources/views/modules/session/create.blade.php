@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -40,7 +40,7 @@
                                     <select class="form-control" name="academic_year" id="academic-year"  data-init-plugin="select2">
                                         <option value="">Select academic year</option>
                                         @forelse($academicYears as $academicYear)
-                                        <option value="{{ $academicYear->id }}">{{ $academicYear->name }}</option>
+                                        <option value="{{ $academicYear->id }}" @if($academicYear->id == old('academic_year')) selected @endif>{{ $academicYear->name }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -55,7 +55,7 @@
                                     <select class="form-control" name="program" id="program"  data-init-plugin="select2" data-semesters="{{ $semesters }}">
                                         <option value="">Select program</option>
                                         @forelse($programs as $program)
-                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                        <option value="{{ $program->id }}" @if($program->id == old('program')) selected @endif>{{ $program->name }}</option>
                                         @empty
                                         @endforelse
                                     </select>
@@ -67,7 +67,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="semester">Semester <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="semester" id="semester"  data-init-plugin="select2">
+                                    <select class="form-control" name="semester" id="semester"  data-init-plugin="select2" data-semester="{{ old('semester') }}">
                                         <option value="">Select semester</option>
                                     </select>
                                     @error('semester')
@@ -104,6 +104,7 @@
 
     function updateSemesterOptions() {
         let semesters = $('#program').data('semesters');
+        var semester = $('#semester').data('semester');
         let programId = $('#program').val();
 
         var filteredSemesters = semesters.filter(function(semester) {
@@ -113,7 +114,7 @@
         var content = '<option value="">Select semester</option>';
 
         var optionStrings = filteredSemesters.map(element => {
-            return `<option value="${element.id}">${element.name}</option>`;
+            return `<option value="${element.id}" ${semester == element.id ? 'selected' : ''}>${element.name}</option>`;
         });
 
         content += optionStrings.join('');

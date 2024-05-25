@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -37,7 +37,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="course-code">Course Code <span class="text-danger">*</span></label>
-                                    <input id="course-code" class="form-control" type="text" name="course_code" placeholder="Course Code" >
+                                    <input id="course-code" class="form-control" type="text" name="course_code" placeholder="Course Code" value="{{ old('course_code') }}">
                                     @error('course_code')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -46,7 +46,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="credit">Credit <span class="text-danger">*</span></label>
-                                    <input id="credit" class="form-control" type="number" name="credit" placeholder="Credit" >
+                                    <input id="credit" class="form-control" type="number" name="credit" placeholder="Credit" value="{{ old('credit') }}">
                                     @error('credit')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -55,10 +55,10 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="program">Program <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="program" id="program"  data-init-plugin="select2" data-semesters="{{ $semesters }}">
+                                    <select class="form-control" name="program" id="program" data-init-plugin="select2" data-semesters="{{ $semesters }}">
                                         <option value="" selected disabled>Select program</option>
                                         @foreach($programs as $program)
-                                        <option value="{{ $program->id }}">{{ $program->name }}</option>
+                                        <option value="{{ $program->id }}" @if($program->id == old('program')) selected @endif>{{ $program->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('program')
@@ -69,7 +69,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="semester">Semester <span class="text-danger">*</span></label>
-                                    <select class="form-control" name="semester" id="semester"  data-init-plugin="select2">
+                                    <select class="form-control" name="semester" id="semester" data-init-plugin="select2" data-semester="{{ old('semester') }}">
                                         <option value="" selected disabled>Select semester</option>
                                     </select>
                                     @error('semester')
@@ -80,7 +80,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <div class="checkbox mt-2 mb-2">
-                                        <input type="checkbox" id="check-elective" name="elective" value="1">
+                                        <input type="checkbox" id="check-elective" name="elective" value="1" @if(old('elective') == 1) checked @endif>
                                         <label for="check-elective">Elective</label>
                                     </div>
                                 </div>
@@ -105,22 +105,29 @@
     $(document).ready(function() {
         $('[data-init-plugin=select2]').select2();
 
+        updateSemesterSelect();
+
         $('body').on('change', '#program', function() {
-            var semesters = $(this).data('semesters');
-            let programId = parseInt($(this).val());
-
-            var filteredSemesters = filterSemestersByProgramId(semesters, programId);
-            
-            var content = '<option value="" selected disabled>Select semester</option>';
-            
-            var optionStrings = filteredSemesters.map(element => {
-                return `<option value="${element.id}">${ element.name }</option>`    
-            });
-
-            content += optionStrings.join('');
-            $('#semester').html(content);
+            updateSemesterSelect();
         });
     })
+
+    function updateSemesterSelect() {
+        var semesters = $('#program').data('semesters');
+        var semester = $('#semester').data('semester');
+        let programId = parseInt($('#program').val());
+
+        var filteredSemesters = filterSemestersByProgramId(semesters, programId);
+
+        var content = '<option value="" selected disabled>Select semester</option>';
+
+        var optionStrings = filteredSemesters.map(element => {
+            return `<option value="${element.id}" ${semester == element.id ? 'selected' : ''}>${ element.name }</option>`
+        });
+
+        content += optionStrings.join('');
+        $('#semester').html(content);
+    }
 
     function filterSemestersByProgramId(semesters, programId) {
         return semesters.filter(function(semester) {

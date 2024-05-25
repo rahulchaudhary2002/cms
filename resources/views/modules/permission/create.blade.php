@@ -27,7 +27,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="name">Name <span class="text-danger">*</span></label>
-                                <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                 @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -36,7 +36,7 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="type">Type <span class="text-danger">*</span> (Note:Do not use white spaces)</label>
-                                <input id="type" class="form-control" type="text" name="type" placeholder="Type" pattern="^\S+$" >
+                                <input id="type" class="form-control" type="text" name="type" placeholder="Type" pattern="^\S+$" value="{{ old('type') }}">
                                 @error('type')
                                 <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -48,7 +48,7 @@
                                 <select class="form-control" name="url" id="url"  data-init-plugin="select2">
                                     <option value="" selected disabled>Select url</option>
                                     @foreach($urls as $url)
-                                    <option value="{{ $url->id }}">{{ $url->name }}</option>
+                                    <option value="{{ $url->id }}" @if($url->id == old('url')) selected @endif>{{ $url->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('url')
@@ -76,7 +76,7 @@
                         @continue
                         @endif
                         <div class="checkbox mt-2 mb-2">
-                            <input class="form-check-input check-role" type="checkbox" name="roles[]" value="{{ $value->id }}" id="role{{ $key }}" @if(old('roles.'.$key)==$value->id) checked @endif>
+                            <input class="form-check-input check-role" type="checkbox" name="roles[]" value="{{ $value->id }}" id="role{{ $key }}" @if(old('roles') && in_array($value->id, old('roles'))) checked @endif>
                             <label class="form-check-label" for="role{{ $key }}">{{ $value->name }}</label>
                         </div>
                         @endforeach
