@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="item-number">
-                                15000
+                                {{ $studentCount }}
                             </div>
                         </div>
                     </div>
@@ -53,55 +53,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="item-number">
-                                1000
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="item-icon">
-                                <span class="fa fa-users text-danger"></span>
-                            </div>
-                            <div class="item-title">
-                                Parents
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="v-line"></div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="item-number">
-                                8000
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="item-icon">
-                                <span class="fa fa-money-bill-1 text-primary"></span>
-                            </div>
-                            <div class="item-title">
-                                Total Earnings
-                            </div>
-                        </div>
-                        <div class="col-md-1">
-                            <div class="v-line"></div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="item-number">
-                                &dollar;950000
+                                {{ $teacherCount }}
                             </div>
                         </div>
                     </div>

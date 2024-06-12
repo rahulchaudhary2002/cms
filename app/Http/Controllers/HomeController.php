@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function dashboard()
     {
-        return view('modules.dash.index');
+        $teacherCount = Teacher::count();
+        $studentCount = Student::count();
+
+        return view('modules.dash.index', compact('teacherCount', 'studentCount'));
     }
 
     public function ckFileUpload(Request $request)
