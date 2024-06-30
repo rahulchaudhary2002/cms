@@ -58,6 +58,7 @@
                                 <th>Name</th>
                                 <th>Mobile</th>
                                 <th>Email</th>
+                                <th>Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -68,6 +69,7 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->mobile }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->roles[0]->role->name }}</td>
                                 <td>
                                     <a class="text-success mr-1" href="{{ route('user.show', $user->key) }}"><span class="fa fa-eye"></span></a>
                                     @if(auth()->user()->can('user.edit') && $user->is_super == 0)
