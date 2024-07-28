@@ -72,7 +72,7 @@
                                             <option value="{{ $role->id }}" @if(old('roles') && in_array($role->id, old('roles'))) selected @endif>{{ $role->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('role')
+                                        @error('roles')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>

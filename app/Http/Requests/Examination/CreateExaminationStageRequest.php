@@ -27,8 +27,8 @@ class CreateExaminationStageRequest extends FormRequest
             'program' =>  'required|exists:programs,id',
             'semester' =>  'required|exists:semesters,id',
             'session' =>  'required|exists:sessions,id',
-            'start_date' => 'required|date|date_format:Y-m-d|after:today',
-            'end_date' => 'required|date|date_format:Y-m-d|after:today',
+            'start_date' => 'required|date|date_format:Y-m-d|after_or_equal:today',
+            'end_date' => 'required|date|date_format:Y-m-d|after_or_equal:today',
         ];
     }
 }

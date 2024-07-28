@@ -28,7 +28,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Name <span class="text-danger">*</span></label>
-                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" >
+                                    <input id="name" class="form-control" type="text" name="name" placeholder="Name" value="{{ old('name') }}">
                                     @error('name')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -89,7 +89,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="start_date">Start Date <span class="text-danger">*</span></label>
-                                    <input id="start_date" class="form-control" type="date" name="start_date" >
+                                    <input id="start_date" class="form-control" type="date" name="start_date" value="{{ old('start_date') ?? now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}">
                                     @error('start_date')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -98,7 +98,7 @@
                             <div class="col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="end_date">End Date <span class="text-danger">*</span></label>
-                                    <input id="end_date" class="form-control" type="date" name="end_date" >
+                                    <input id="end_date" class="form-control" type="date" name="end_date" value="{{ old('end_date') ?? now()->format('Y-m-d') }}" min="{{ now()->format('Y-m-d') }}">
                                     @error('end_date')
                                     <span class="text-danger">{{ $message }}</span>
                                     @enderror

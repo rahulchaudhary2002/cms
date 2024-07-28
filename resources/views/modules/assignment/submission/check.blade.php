@@ -79,13 +79,16 @@
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="grade-{{ $answer->id }}">Grade <span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="grades[{{ $answer->id }}]" placeholder="Grade">
+                                <input class="form-control" type="text" name="grades[{{ $answer->id }}]" placeholder="Grade" value="{{ old('grades.'.$answer->id) }}">
+                                @error('grades.' . $answer->id)
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-12">
                             <div class="form-group">
                                 <label for="comment-{{ $answer->id }}">Comment</label>
-                                <input class="form-control" type="text" name="comments[{{ $answer->id }}]" placeholder="Comment">
+                                <input class="form-control" type="text" name="comments[{{ $answer->id }}]" placeholder="Comment" value="{{ old('comments.'.$answer->id) }}">
                             </div>
                         </div>
                     </div>
@@ -100,13 +103,16 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="overall-grade">Overall Grade <span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="overall_grade" placeholder="Overall grade">
+                                <input class="form-control" type="text" name="overall_grade" placeholder="Overall grade" value="{{ old('overall_grade') }}">
+                                @error('overall_grade')
+                                <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="remarks">Remarks</label>
-                                <input class="form-control" type="text" name="remarks" placeholder="Remarks">
+                                <input class="form-control" type="text" name="remarks" placeholder="Remarks" value="{{ old('remarks') }}">
                             </div>
                         </div>
                         <div class="col-md-12">

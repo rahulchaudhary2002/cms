@@ -73,7 +73,7 @@
                                             <option value="{{ $role->id }}" @if($user->hasRole($role->key)) selected @endif>{{ $role->name }}</option>
                                             @endforeach
                                         </select>
-                                        @error('role')
+                                        @error('roles')
                                         <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
