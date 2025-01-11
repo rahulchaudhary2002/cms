@@ -88,6 +88,11 @@ return [
         'examination/record/show/*/*',
         'examination/record/export-template',
         'examination/record/import',
+        'meeting',
+        'meeting/create',
+        'meeting/store',
+        'meeting/edit/*',
+        'meeting/update/*',
     ],
 
     'roles' => [
@@ -188,6 +193,12 @@ return [
         'attendance' => [
             'view attendance',
             'take attendance',
+        ],
+
+        'meeting' => [
+            'view meeting',
+            'create meeting',
+            'update meeting',
         ],
     ]
 ];

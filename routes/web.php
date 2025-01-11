@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ExaminationRecordController;
 use App\Http\Controllers\ExaminationStageController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\RoleController;
@@ -178,5 +179,13 @@ Route::middleware(['auth', 'checkPermission'])->group(function () {
             Route::get('/import', [ExaminationRecordController::class, 'importForm'])->name('import')->middleware('can:examination-record.create');
             Route::post('/import', [ExaminationRecordController::class, 'import'])->middleware('can:examination-record.create');
         });
+    });
+
+    Route::name('meeting.')->prefix('meeting')->group(function () {
+        Route::get('/', [MeetingController::class, 'index'])->name('index')->middleware('can:meeting.view');
+        Route::get('/create', [MeetingController::class, 'create'])->name('create')->middleware('can:meeting.create');
+        Route::post('/store', [MeetingController::class, 'store'])->name('store')->middleware('can:meeting.create');
+        Route::get('/edit/{key}', [MeetingController::class, 'edit'])->name('edit')->middleware('can:meeting.update');
+        Route::put('/update/{key}', [MeetingController::class, 'update'])->name('update')->middleware('can:meeting.update');
     });
 });

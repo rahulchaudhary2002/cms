@@ -16,6 +16,7 @@ use App\Policies\ProgramPolicy;
 use App\Policies\RolePolicy;
 use App\Policies\SemesterPolicy;
 use App\Policies\SessionPolicy;
+use App\Policies\MeetingPolicy;
 use App\Policies\StudentAttendancePolicy;
 use App\Policies\StudentPolicy;
 use App\Policies\UniversityPolicy;
@@ -59,6 +60,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::resource('check-assignment-submission', CheckAssignmentSubmissionPolicy::class);
         Gate::resource('examination-stage', ExaminationStagePolicy::class);
         Gate::resource('examination-record', ExaminationRecordPolicy::class);
+        Gate::resource('meeting', MeetingPolicy::class);
 
         Gate::before(function ($user, $ability) {
             return $user->hasRole('superadmin') ? true : null;
