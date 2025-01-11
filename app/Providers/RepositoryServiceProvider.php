@@ -16,6 +16,7 @@ use App\Interfaces\ProgramRepositoryInterFace;
 use App\Interfaces\RoleRepositoryInterface;
 use App\Interfaces\SemesterRepositoryInterFace;
 use App\Interfaces\SessionRepositoryInterface;
+use App\Interfaces\MeetingRepositoryInterface;
 use App\Interfaces\StudentAttendanceRepositoryInterface;
 use App\Interfaces\StudentCourseRepositoryInterface;
 use App\Interfaces\StudentRepositoryInterface;
@@ -38,6 +39,7 @@ use App\Repositories\ProgramRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\SemesterRepository;
 use App\Repositories\SessionRepository;
+use App\Repositories\MeetingRepository;
 use App\Repositories\StudentAttendanceRepository;
 use App\Repositories\StudentCourseRepository;
 use App\Repositories\StudentRepository;
@@ -77,6 +79,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ExaminationStageRepositoryInterface::class, ExaminationStageRepository::class);
         $this->app->bind(ExaminationRecordRepositoryInterface::class, ExaminationRecordRepository::class);
         $this->app->bind(ExaminationMarkRepositoryInterface::class, ExaminationMarkRepository::class);
+        $this->app->bind(MeetingRepositoryInterface::class, MeetingRepository::class);
     }
 
     /**

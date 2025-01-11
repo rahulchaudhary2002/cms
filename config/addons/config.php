@@ -189,5 +189,11 @@ return [
             'view attendance',
             'take attendance',
         ],
+
+        'meeting' => [
+            'view meeting',
+            'create meeting',
+            'update meeting',
+        ],
     ]
 ];

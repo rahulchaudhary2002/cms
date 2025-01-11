@@ -208,5 +208,15 @@
             </ul>
         </li>
         @endif
+        @if(auth()->user()->can('meeting.view'))
+        <li class="{{ request()->is('meeting') || request()->is('meeting/*') ? 'active' : '' }}">
+            <a href="{{ route('meeting.index') }}">
+                <span class="sidebar-menu-item">
+                    <span class="fa fa-handshake"></span>
+                    <span class="sidebar-menu-text">Meetings</span>
+                </span>
+            </a>
+        </li>
+        @endif
     </ul>
 </div>
