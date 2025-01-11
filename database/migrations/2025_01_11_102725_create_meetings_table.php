@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('key')->unique();
             $table->string('topic');
             $table->string('meeting_id')->unique();
-            $table->string('join_url');
+            $table->longText('join_url');
+            $table->longText('start_url');
             $table->dateTime('start_time');
             $table->integer('duration');
             $table->unsignedBigInteger('user_id');

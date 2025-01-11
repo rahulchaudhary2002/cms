@@ -14,6 +14,7 @@ class Meeting extends Model
         'topic',
         'meeting_id',
         'join_url',
+        'start_url',
         'start_time',
         'duration',
         'user_id'

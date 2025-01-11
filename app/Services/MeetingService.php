@@ -3,18 +3,20 @@
 namespace App\Services;
 
 use App\Interfaces\MeetingRepositoryInterface;
+use App\Traits\ZoomTrait;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class MeetingService
 {
-    private MeetingRepositoryInterface $meetingRepository;
-    private ZoomService $zoomService;
+    use ZoomTrait;
 
-    public function __construct(MeetingRepositoryInterface $meetingRepository, ZoomService $zoomService)
+    private MeetingRepositoryInterface $meetingRepository;
+
+    public function __construct(MeetingRepositoryInterface $meetingRepository)
     {
         $this->meetingRepository = $meetingRepository;
-        $this->zoomService = $zoomService;
     }
 
     public function getMeetings($request)
@@ -31,8 +33,28 @@ class MeetingService
     {
         try {
             DB::transaction(function () use ($request) {
-                $zoom = $this->zoomService->createMeeting($request->topic, $request->startTime, $request->duration);
-                $this->meetingRepository->create($zoom);
+                $zoom = $this->createZoomMeeting($request->topic, $request->startTime, $request->duration, Str::random(6));
+
+                $request['id'] = $zoom['data']['id'];
+                $request['start_url'] = $zoom['data']['start_url'];
+                $request['join_url'] = $zoom['data']['join_url'];
+
+                $this->meetingRepository->create($request);
+            });
+
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+    public function updateMeeting($request, $key)
+    {
+        try {
+            DB::transaction(function () use ($request, $key) {
+                $meeting = $this->getMeetingByKey($key);
+                $this->updateZoomMeeting($meeting->meeting_id, $request->topic, $request->startTime, $request->duration, Str::random(6));
+                $this->meetingRepository->update($request, $key);
             });
 
             return true;
@@ -40,10 +62,5 @@ class MeetingService
             dd($e);
             return false;
         }
-    }
-
-    public function updateMeeting($request, $key)
-    {
-        return $this->meetingRepository->update($request, $key);
     }
 }

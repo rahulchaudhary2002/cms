@@ -38,10 +38,16 @@
                             <tr>
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $meeting->topic }}</td>
+                                <td>{{ $meeting->start_time }}</td>
                                 <td>{{ $meeting->duration }} mins</td>
                                 <td>
                                     @if(auth()->user()->can('meeting.edit'))
                                     <a class="text-danger" href="{{ route('meeting.edit', $meeting->key) }}"><span class="fa fa-edit"></span></a>
+                                    @endif
+                                    @if(auth()->user()->id == $meeting->user_id)
+                                    <a class="text-primary ml-2" title="Start Meeting" href="{{ $meeting->start_url }}" target="_blank"><span class="fa fa-play"></span></a>
+                                    @else
+                                    <a class="text-primary ml-2" title="Join Meeting" href="{{ $meeting->join_url }}" target="_blank"><span class="fa fa-play"></span></a>
                                     @endif
                                 </td>
                             </tr>

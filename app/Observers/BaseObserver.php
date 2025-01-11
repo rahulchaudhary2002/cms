@@ -8,14 +8,14 @@ class BaseObserver
 {
     public function generateKey($model, $data): void
     {
-        $key = Str::slug($data->name ?? $data->title);
+        $key = Str::slug($data->name ?? $data->title ?? $data->topic);
 
         if ($model::where('key', $key)->exists()) {
             $key = $this->incrementKey($key, $model);
             $data->key = $key;
         }
         else {
-            $data->key = Str::slug($data->name ?? $data->title);
+            $data->key = Str::slug($data->name ?? $data->title ?? $data->topic);
         }
     }
 

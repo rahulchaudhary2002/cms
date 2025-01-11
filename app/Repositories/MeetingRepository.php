@@ -56,6 +56,7 @@ class MeetingRepository implements MeetingRepositoryInterface
             'topic'      => $request->topic,
             'meeting_id' => $request->id,
             'join_url'   => $request->join_url,
+            'start_url'   => $request->start_url,
             'start_time' => $request->start_time,
             'duration'   => $request->duration,
             'user_id'    => auth()->user()->id
@@ -68,8 +69,6 @@ class MeetingRepository implements MeetingRepositoryInterface
 
         $meeting->update([
             'topic'      => $request->topic,
-            'meeting_id' => $request->id,
-            'join_url'   => $request->join_url,
             'start_time' => $request->start_time,
             'duration'   => $request->duration
         ]);
