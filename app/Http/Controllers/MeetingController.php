@@ -48,4 +48,12 @@ class MeetingController extends Controller
         }
         return redirect()->route('meeting.index')->with('error', 'Meeting is not updated.');
     }
+
+    public function delete(Request $request)
+    {
+        if($this->meetingService->deleteMeeting($request->key)) {
+            return redirect()->route('meeting.index')->with('success', 'Meeting is updated.');
+        }
+        return redirect()->route('meeting.index')->with('error', 'Meeting is not updated.');
+    }
 }

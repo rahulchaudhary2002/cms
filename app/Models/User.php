@@ -79,6 +79,12 @@ class User extends Authenticatable
         return $this->hasOne(Teacher::class);
     }
 
+    public function zoomToken()
+    {
+        return $this->hasOne(ZoomToken::class);
+    }
+
+
     public function assignRole($role)
     {
         $role = Role::where('key', $role)->first();

@@ -88,11 +88,14 @@ return [
         'examination/record/show/*/*',
         'examination/record/export-template',
         'examination/record/import',
+        'zoom/authorize',
+        'zoom/callback',
         'meeting',
         'meeting/create',
         'meeting/store',
         'meeting/edit/*',
         'meeting/update/*',
+        'meeting/delete',
     ],
 
     'roles' => [
@@ -199,6 +202,7 @@ return [
             'view meeting',
             'create meeting',
             'update meeting',
+            'delete meeting',
         ],
     ]
 ];

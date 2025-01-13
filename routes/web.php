@@ -18,6 +18,7 @@ use App\Http\Controllers\StudentSemesterController;
 use App\Http\Controllers\TeacherCourseController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ZoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +35,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('/login');
 });
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     Route::post('/ck-file-upload', [HomeController::class, 'ckFileUpload'])->name('ck-file-upload');
     Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
@@ -181,11 +182,17 @@ Route::middleware(['auth', 'checkPermission'])->group(function () {
         });
     });
 
+    Route::name('zoom.')->prefix('zoom')->group(function () {
+        Route::get('/authorize', [ZoomController::class, 'redirectToZoom'])->name('authorize');
+        Route::get('/callback', [ZoomController::class, 'handleZoomCallback']);
+    });
+
     Route::name('meeting.')->prefix('meeting')->group(function () {
         Route::get('/', [MeetingController::class, 'index'])->name('index')->middleware('can:meeting.view');
         Route::get('/create', [MeetingController::class, 'create'])->name('create')->middleware('can:meeting.create');
         Route::post('/store', [MeetingController::class, 'store'])->name('store')->middleware('can:meeting.create');
         Route::get('/edit/{key}', [MeetingController::class, 'edit'])->name('edit')->middleware('can:meeting.update');
         Route::put('/update/{key}', [MeetingController::class, 'update'])->name('update')->middleware('can:meeting.update');
+        Route::delete('/delete', [MeetingController::class, 'delete'])->name('delete')->middleware('can:meeting.delete');
     });
 });

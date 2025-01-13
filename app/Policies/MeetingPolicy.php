@@ -23,4 +23,9 @@ class MeetingPolicy extends BasePolicy
     {
         return $this->getPermission($user, 'update-meeting');
     }
+
+    public function delete(User $user)
+    {
+        return $this->getPermission($user, 'delete-meeting');
+    }
 }

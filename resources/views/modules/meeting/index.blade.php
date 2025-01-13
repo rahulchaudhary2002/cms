@@ -17,6 +17,7 @@
                 <div class="card-header d-flex-space-between align-center">
                     <h1 class="card-title">Meetings List</h1>
                     <div class="card-setting d-flex gap-2">
+                        <a class="btn btn-sm btn-outline-primary text-center btn-rounded" href="{{ route('zoom.authorize') }}"><span class="fa fa-refresh"></span> {{ auth()->user()->zoomToken ? 'reconnect with zoom' : 'connect with zoom' }}</a>
                         @if(auth()->user()->can('meeting.create'))
                         <a class="btn btn-sm btn-outline-warning text-center btn-rounded" href="{{ route('meeting.create') }}"><span class="fa fa-plus"></span> create meeting</a>
                         @endif
@@ -42,12 +43,15 @@
                                 <td>{{ $meeting->duration }} mins</td>
                                 <td>
                                     @if(auth()->user()->can('meeting.edit'))
-                                    <a class="text-danger" href="{{ route('meeting.edit', $meeting->key) }}"><span class="fa fa-edit"></span></a>
+                                    <a class="text-success" href="{{ route('meeting.edit', $meeting->key) }}"><span class="fa fa-edit"></span></a>
                                     @endif
                                     @if(auth()->user()->id == $meeting->user_id)
                                     <a class="text-primary ml-2" title="Start Meeting" href="{{ $meeting->start_url }}" target="_blank"><span class="fa fa-play"></span></a>
                                     @else
                                     <a class="text-primary ml-2" title="Join Meeting" href="{{ $meeting->join_url }}" target="_blank"><span class="fa fa-play"></span></a>
+                                    @endif
+                                    @if(auth()->user()->can('meeting.edit'))
+                                    <a class="text-danger ml-2" href="javascript:;" onclick="deleteMeeting('{{ $meeting->key }}')"><span class="fa fa-trash"></span></a>
                                     @endif
                                 </td>
                             </tr>
@@ -64,5 +68,27 @@
         </div>
     </div>
 </div>
+
+@endsection
+
+@section('page-specific-script')
+
+<script>
+    var delete_url = "{{ route('meeting.delete') }}";
+
+    function deleteMeeting(key) {
+        $.ajax({
+            type: 'post',
+            url: delete_url,
+            data: {
+                _method: 'delete',
+                key: key
+            },
+            success: function(res) {
+                window.location.reload();
+            }
+        });
+    }
+</script>
 
 @endsection
