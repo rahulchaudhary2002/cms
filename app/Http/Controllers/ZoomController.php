@@ -21,10 +21,10 @@ class ZoomController extends Controller
         $code = $request->query('code');
         $response = $this->handleCallback($code);
         
-        if (isset($response['error'])) {
-            return redirect(session('zoom_rediret_after_callback_url'))->withErrors(['error' => $response['error']]);
+        if ($response) {
+            return redirect(session('zoom_rediret_after_callback_url'))->with('success', 'Zoom authorized successfully!');
         }
-
-        return redirect(session('zoom_rediret_after_callback_url'))->with('success', 'Zoom authorized successfully!');
+        
+        return redirect(session('zoom_rediret_after_callback_url'))->with('error', 'Fail to connect with zoom!');
     }
 }

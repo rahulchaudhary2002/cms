@@ -30,7 +30,7 @@ trait ZoomTrait
     public function handleCallback($code)
     {
         if (!$code) {
-            return ['error' => 'Authorization failed, no code returned.'];
+            return false;
         }
 
         $client = new Client();
@@ -62,7 +62,7 @@ trait ZoomTrait
 
             return $data;
         } catch (\Exception $e) {
-            return ['error' => 'Failed to retrieve access token: ' . $e->getMessage()];
+            return false;
         }
     }
 
@@ -73,7 +73,7 @@ trait ZoomTrait
         $refreshToken = $zoomToken->refresh_token;
 
         if (!$refreshToken) {
-            return ['error' => 'No refresh token available, please authorize again.'];
+            return false;
         }
 
         $client = new Client();
@@ -102,7 +102,7 @@ trait ZoomTrait
             return $data;
         } catch (\Exception $e) {
             $zoomToken->delete();
-            return ['error' => 'Failed to refresh token: ' . $e->getMessage()];
+            return false;
         }
     }
 
@@ -145,7 +145,7 @@ trait ZoomTrait
 
             return $meeting;
         } catch (\Exception $e) {
-            return ['error' => 'Failed to create Zoom meeting: ' . $e->getMessage()];
+            return false;
         }
     }
 
@@ -185,7 +185,7 @@ trait ZoomTrait
             }
             return json_decode($response->getBody(), true);
         } catch (\Exception $e) {
-            return ['error' => 'Failed to update Zoom meeting: ' . $e->getMessage()];
+            return false;
         }
     }
 
@@ -202,9 +202,9 @@ trait ZoomTrait
                 ],
             ]);
 
-            return ['success' => 'Zoom meeting deleted successfully.'];
+            return true;
         } catch (\Exception $e) {
-            return ['error' => 'Failed to delete Zoom meeting: ' . $e->getMessage()];
+            return false;
         }
     }
 
@@ -227,7 +227,7 @@ trait ZoomTrait
 
             return json_decode($response->getBody(), true);
         } catch (\Exception $e) {
-            return ['error' => 'Failed to add registrant: ' . $e->getMessage()];
+            return false;
         }
     }
 }
