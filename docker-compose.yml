@@ -28,7 +28,7 @@ services:
       PMA_HOST: cms_db
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
-      - 8888:80
+      - 7777:80
     networks:
       - cms-network
 
@@ -56,8 +56,8 @@ services:
     restart: unless-stopped
     tty: true
     ports:
-      - "8100:80"
-      - "8143:443"
+      - "7100:80"
+      - "7143:443"
     volumes:
       - ./:/var/www
       - ./.dockerfile/nginx/conf.d:/etc/nginx/conf.d/
